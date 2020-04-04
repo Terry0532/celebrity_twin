@@ -1,0 +1,29 @@
+/* ELEMENT STYLES */
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+header {
+  border: solid 1.75rem rgb(50, 50, 51);
+  width: 100%;
+}
+
+/* CLASS STYLES */
+.headerText {
+  color: #ce1cc5;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 80px;
+  opacity: 100%;
+  padding: 1rem 2.5rem;
+  text-align: right;
+  text-shadow: 2px 2px rgb(54, 128, 148);
+  -webkit-text-stroke-width: 1.75px;
+  -webkit-text-stroke-color: #ffffff;
+}
+.jumbotron {
+  background-image: url("../images/andi-kernel-ka-s-9_SV-LHxGBU-unsplash.jpg");
+  background-position: center center;
+  background-size: cover;
+  height: 300px;
+  width: 100%;
+}
