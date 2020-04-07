@@ -1,0 +1,2 @@
+// NOTES FROM ISSUE14:
+// We'll need a rough JavaScript framework to make our HTML dynamic, so I will start building these template functions in the "style.js" (versus the "script.js") file. These can later be integrated into one stylesheet.//
