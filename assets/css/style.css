@@ -21,6 +21,9 @@ input[type="submit"].button-primary {
   border-radius: 8px;
   height: 300px;
 }
+.button {
+  padding: 0rem 0.75rem;
+}
 .headerText {
   animation: blinking 1s infinite;
   color: #ce1cc5;
@@ -38,8 +41,20 @@ input[type="submit"].button-primary {
   background-size: cover;
   height: 275px;
 }
-.row {
-  margin: 0.5rem 1.5rem;
+.link {
+  color: #ffffff;
+  font-size: inherit;
+}
+
+/* ID STYLES */
+#facebook {
+  background-color: #3b5998;
+}
+#pinterest {
+  background-color: #c8232c;
+}
+#twitter {
+  background-color: #00acee;
 }
 
 /* KEYFRAMES */
