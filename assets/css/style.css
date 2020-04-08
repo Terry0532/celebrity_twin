@@ -20,8 +20,10 @@ input[type="submit"].button-primary {
 
 /* CLASS STYLES */
 .bordered {
-  border: 1px solid #888;
+  background-color: rgb(248, 248, 248);
+  border: 1px solid rgb(209, 207, 207);
   border-radius: 8px;
+  padding: 1rem 1rem;
 }
 .button {
   padding: 0rem 0.75rem;
@@ -56,6 +58,10 @@ input[type="submit"].button-primary {
 }
 
 /* ID STYLES */
+#celebImage {
+  max-height: 100%;
+  max-width: 100%;
+}
 /* birthstone IDs--colors the gemstone icon to match actual stone color: */
 #janGarnet {
   filter: hue-rotate(150deg) saturate(70%);
