@@ -11,54 +11,79 @@ $(document).ready(function(){
 
   // Adjusts color of birthstone icon to match birth month:
   function birthstoneSelect() {
+    // birthstone variables (in alphabetical order):
+    var amethyst = "Amethyst <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, amethyst' class='unicodePad' id='febAmethyst'>";
+    var bloodstone = "Bloodstone <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, bloodstone' class='unicodePad' id='marBloodstone'>";
+    var diamond = "Diamond <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, diamond' class='unicodePad' id='aprDiamond'>";
+    var emerald = "Emerald <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, emerald' class='unicodePad' id='mayEmerald'>";
+    var garnet = "Garnet <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, garnet' class='unicodePad' id='janGarnet'>";
+    var opal = "Opal <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, opal' class='unicodePad' id='octOpal'>";
+    var pearl = "Pearl <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, pearl' class='unicodePad' id='junPearl'>";
+    var peridot = "Peridot <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, peridot' class='unicodePad' id='augPeridot'>";
+    var ruby = "Ruby <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, ruby' class='unicodePad' id='julRuby'>";
+    var sapphire = "Sapphire <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, sapphire' class='unicodePad' id='sepSapphire'>";
+    var topaz = "Topaz <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, topaz' class='unicodePad' id='novTopaz'>";
+    var turquoise = "Turquoise <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, turquoise' class='unicodePad' id='decTurquoise'>";
 
-    var celebBirthMonth = "May";
+    var birthstone;
+    var celebBirthMonth;
+
+    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** // 
+    celebBirthMonth = "May";
 
     if (celebBirthMonth === "January") {
-      $(".birthstone").attr("id", "janGarnet");
+      birthstone = garnet;
     } else if (celebBirthMonth === "February") {
-      $(".birthstone").attr("id", "febAmethyst");
+      birthstone = amethyst;
     } else if (celebBirthMonth === "March") {
-      $(".birthstone").attr("id", "marBloodstone");
+      birthstone = bloodstone;
     } else if (celebBirthMonth === "April") {
-      $(".birthstone").attr("id", "aprDiamond");
+      birthstone = diamond;
     } else if (celebBirthMonth === "May") {
-      $(".birthstone").attr("id", "mayEmerald");
+      birthstone = emerald;
     } else if (celebBirthMonth === "June") {
-      $(".birthstone").attr("id", "junPearl");
+      birthstone = pearl;
     } else if (celebBirthMonth === "July") {
-      $(".birthstone").attr("id", "julRuby");
+      birthstone = ruby;
     } else if (celebBirthMonth === "August") {
-      $(".birthstone").attr("id", "augPeridot");
+      birthstone = peridot;
     } else if (celebBirthMonth === "September") {
-      $(".birthstone").attr("id", "sepSapphire");
+      birthstone = sapphire;
     } else if (celebBirthMonth === "October") {
-      $(".birthstone").attr("id", "octOpal");
+      birthstone = opal;
     } else if (celebBirthMonth === "November") {
-      $(".birthstone").attr("id", "novTopaz");
+      birthstone = topaz;
+    } else if (celebBirthMonth === "December") {
+      birthstone = turquoise;
     } else {
-      $(".birthstone").attr("id", "decTurquoise");
+      return;
     }
+    $("#celebBirthstone").html(birthstone);
   };
   birthstoneSelect();
 
   function zodiacSelect() {
     // zodiac sign variables (in sequence):
-    var aries = "Aries <span id='unicodePad'>&#9800;</span>";
-    var taurus = "Taurus <span id='unicodePad'>&#9801;</span>";
-    var gemini = "Gemini <span id='unicodePad'>&#9802;</span>";
-    var cancer = "Cancer <span id='unicodePad'>&#9803;</span>";
-    var leo = "Leo <span id='unicodePad'>&#9804;</span>";
-    var virgo = "Virgo <span id='unicodePad'>&#9805;</span>";
-    var libra = "Libra <span id='unicodePad'>&#9806;</span>";
-    var scorpio = "Scorpio <span id='unicodePad'>&#9807;</span>";
-    var sagittarius = "Sagittarius <span id='unicodePad'>&#9808;</span>";
-    var capricorn = "Capricorn <span id='unicodePad'>&#9809;</span>";
-    var aquarius = "Aquarius <span id='unicodePad'>&#9810;</span>";
-    var pisces = "Pisces <span id='unicodePad'>&#9811;</span>";
+    var aries = "Aries <span class='unicodePad'>&#9800;</span>";
+    var taurus = "Taurus <span class='unicodePad'>&#9801;</span>";
+    var gemini = "Gemini <span class='unicodePad'>&#9802;</span>";
+    var cancer = "Cancer <span class='unicodePad'>&#9803;</span>";
+    var leo = "Leo <span class='unicodePad'>&#9804;</span>";
+    var virgo = "Virgo <span class='unicodePad'>&#9805;</span>";
+    var libra = "Libra <span class='unicodePad'>&#9806;</span>";
+    var scorpio = "Scorpio <span class='unicodePad'>&#9807;</span>";
+    var sagittarius = "Sagittarius <span class='unicodePad'>&#9808;</span>";
+    var capricorn = "Capricorn <span class='unicodePad'>&#9809;</span>";
+    var aquarius = "Aquarius <span class='unicodePad'>&#9810;</span>";
+    var pisces = "Pisces <span class='unicodePad'>&#9811;</span>";
+    
     var zodiacDate;
     var zodiacMonth;
     var zodiacName;
+
+    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** //
+    zodiacDate = 13;
+    zodiacMonth = "May";
 
     // determines zodiac sign based on birth date ranges:
     if ((zodiacMonth === "March" && zodiacDate >= 21) || (zodiacMonth === "April" && zodiacDate < 20)) {
@@ -91,7 +116,7 @@ $(document).ready(function(){
     // displays zodiac name and sign:
     $("#celebZodiac").html(zodiacName);
   };
-  // zodiacSelect();
+  zodiacSelect();
 
   // for dispalying ERROR MODAL:
   function displayModal() {

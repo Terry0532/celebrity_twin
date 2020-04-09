@@ -69,6 +69,9 @@ input[type="submit"].button-primary {
   color: rgb(255, 115, 0);
   font-family: 'Kaushan Script', cursive;
 }
+.unicodePad {
+  padding-left: 0.75rem;
+}
 /* modal classes */
 .modal {
   position: fixed;
@@ -131,9 +134,6 @@ input[type="submit"].button-primary {
 }
 #errorCeleb {
   color: rgb(255, 115, 0);
-}
-#unicodePad {
-  padding-left: 0.75rem;
 }
 /* birthstone IDs (sets color of SVG gemstone image): */
 #janGarnet {
