@@ -18,7 +18,8 @@ let matchDescription = "";
 
 
 
-
+// SECONDARY API KEY FOR NAMEFACE API
+var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933d";
 
 
 // Settings and API call to namefaceapi
@@ -66,77 +67,71 @@ faceNameAPICall(settings);
 // Checking the facename matches in the imdb API
 var checkMatches = function(namefaceMatches) {
     
-    //wait = true;
     //console.log("namefaceMatches array = ");
     //console.log(namefaceMatches);
+       
+    
+    // LOOPING THROUGH ALL CELEBS ON LIST
+    for(var i = (namefaceMatches.length - 1); i >= 0; i--) {
+        
+        const namefaceMatch = namefaceMatches[i];
+        //console.log(namefaceMatch);
 
-    //return new Promise((resolve, reject) => {        
-        
-            // LOOPING THROUGH ALL CELEBS ON LIST
-            for(var i = (namefaceMatches.length - 1); i >= 0; i--) {
-                
-                const namefaceMatch = namefaceMatches[i];
-                //console.log(namefaceMatch);
-        
-                // Name is swapped to replace spaces with "%20" in order to pass the whole name through the api search
-                var fixName = namefaceMatches[i];
-                var space = " ";
-                var spaceFill = "%20";
-        
-                while(fixName.indexOf(space) > -1) {
-                    fixName = fixName.replace(space, spaceFill);
-                }
-                 
+        // Name is swapped to replace spaces with "%20" in order to pass the whole name through the api search
+        var fixName = namefaceMatches[i];
+        var space = " ";
+        var spaceFill = "%20";
+
+        while(fixName.indexOf(space) > -1) {
+            fixName = fixName.replace(space, spaceFill);
+        }
             
-                var searchCeleb = fixName;
-                // var searchCeleb = namefaceMatches[i];
-                // var searchCeleb = "Nelson Mandela";
-            
-            
-                var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
-                //console.log(queryURL);
-            
-            
-            
-                //imdbAPIcall(queryURL).then(postMatch);
-                imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
-                
-                
-        
-            }
-        
-            // Called in event listener
-            //postMatch();
+    
+        var searchCeleb = fixName;
+        // var searchCeleb = namefaceMatches[i];
+        // var searchCeleb = "Nelson Mandela";
+    
+    
+        var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
+        //console.log(queryURL);
+    
+    
+    
+        //imdbAPIcall(queryURL).then(postMatch);
+        imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
         
         
-            // SINGLE TESTS
-            // var searchCeleb = namefaceMatches[0];
-            // var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
-            // console.log(queryURL);
-        
-            // $.ajax({
-            //     url: queryURL,
-            //     method: "GET",
-            //     crossDomain: true,
-            //     error: function(err) {
-            //         celebrityFound = false;
-            //         console.log(err.status);
-            //         postMatch();
-            //     }
-            // }).then(function(response){
-            //     celebrityFound = true;
-            //     console.log(response);
-            //     console.log("results = " + response.result);
-            //     postMatch();
-        
-            // });
-        
-        
-            //wait = false;
+
+    }
+
+    // Called in event listener
+    //postMatch();
 
 
+    // SINGLE TESTS
+    // var searchCeleb = namefaceMatches[0];
+    // var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
+    // console.log(queryURL);
 
-    //});
+    // $.ajax({
+    //     url: queryURL,
+    //     method: "GET",
+    //     crossDomain: true,
+    //     error: function(err) {
+    //         celebrityFound = false;
+    //         console.log(err.status);
+    //         postMatch();
+    //     }
+    // }).then(function(response){
+    //     celebrityFound = true;
+    //     console.log(response);
+    //     console.log("results = " + response.result);
+    //     postMatch();
+
+    // });
+    
+        
+
 };
 
 
@@ -213,10 +208,3 @@ var saveMatchData = function(name, imgURL, description) {
 }
 
 
-// Event listener to start search on form submission
-$("form").on("submit", function(event){
-    event.preventDefault();
-    checkMatches();
-    console.log("Moving onto postMatch.")
-    postMatch();
-});
