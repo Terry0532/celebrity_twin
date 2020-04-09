@@ -11,7 +11,8 @@ $(document).ready(function(){
 
   // Adjusts color of birthstone icon to match birth month:
   function birthstoneSelect() {
-    var celebBirthMonth;
+
+    var celebBirthMonth = "December";
 
     if (celebBirthMonth === "January") {
       $(".birthstone").attr("id", "janGarnet");
@@ -39,7 +40,7 @@ $(document).ready(function(){
       $(".birthstone").attr("id", "decTurquoise");
     }
   };
-  // birthstoneSelect();
+  birthstoneSelect();
 
   // function zodiacSelect() {
   //   var celebBirthMonth;
