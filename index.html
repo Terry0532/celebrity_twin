@@ -58,30 +58,36 @@
     <!-- DISPLAY CARD -->
     <!-- dynamically displays the results of search query (default display is hidden): -->
     <!-- card header -->
-    <div class="container" id="results" hidden>
+    <div class="container" id="results">
       <h2>Search Results</h2>
       <!-- card body -->
       <div class="row bordered">
         <!-- left-hand column -->
         <div class="six columns">
+          <!-- CELEB NAME -->
           <div class="row u-full-width">
             <h5>Your celeb: <span class="resultText" id="celebResult">Starlette O'Hara</span></h5>
           </div>
+          <!-- CELEB DATE OF BIRTH -->
           <div class="row u-full-width">
             <h5>Date of birth: <span class="resultText" id="celebDOB">13 May 1996</span></h5>
           </div>
+          <!-- CELEB BIRTHPLACE -->
           <div class="row u-full-width">
             <h5>Birthplace: <span class="resultText" id="celebBirthplace">Area 51</span></h5>
           </div>
+          <!-- CELEB ZODIAC SIGN -->
           <div class="row u-full-width">
             <h5>Zodiac sign: <span class="resultText" id="celebZodiac">Taurus  <span id="astrologyUnicode">&#9801;</span></span></h5>
           </div>
+          <!-- CELEB BIRTHSTONE -->
           <div class="row u-full-width">
-            <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald  </span><img src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" id="mayEmerald"></h5>
+            <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald  </span><img src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
           </div>
         </div>
         <!-- right-hand column -->
         <div class="six columns">
+          <!-- CELEB IMAGE -->
           <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity" data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
         </div>
       </div>

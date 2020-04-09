@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+  // Display search results:
   function dispResults() {
     // displays HORIZONTAL RULE to separate search from result:
     $("form").after("<hr>");
@@ -7,7 +8,40 @@ $(document).ready(function(){
     $("#results").prop("hidden", false);
   };
   // dispResults();
+
+  // Adjusts color of birthstone icon to match birth month:
+  function birthstoneSelect() {
+    var celebBirthMonth;
+
+    if (celebBirthMonth === "January") {
+      $(".birthstone").attr("id", "janGarnet");
+    } else if (celebBirthMonth === "February") {
+      $(".birthstone").attr("id", "febAmethyst");
+    } else if (celebBirthMonth === "March") {
+      $(".birthstone").attr("id", "marBloodstone");
+    } else if (celebBirthMonth === "April") {
+      $(".birthstone").attr("id", "aprDiamond");
+    } else if (celebBirthMonth === "May") {
+      $(".birthstone").attr("id", "mayEmerald");
+    } else if (celebBirthMonth === "June") {
+      $(".birthstone").attr("id", "junPearl");
+    } else if (celebBirthMonth === "July") {
+      $(".birthstone").attr("id", "julRuby");
+    } else if (celebBirthMonth === "August") {
+      $(".birthstone").attr("id", "augPeridot");
+    } else if (celebBirthMonth === "September") {
+      $(".birthstone").attr("id", "sepSapphire");
+    } else if (celebBirthMonth === "October") {
+      $(".birthstone").attr("id", "octOpal");
+    } else if (celebBirthMonth === "November") {
+      $(".birthstone").attr("id", "novTopaz");
+    } else {
+      $(".birthstone").attr("id", "decTurquoise");
+    }
+  };
+  // birthstoneSelect();
 });
+
 
 
 // NOTES FROM ISSUE14:
