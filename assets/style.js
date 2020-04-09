@@ -40,6 +40,16 @@ $(document).ready(function(){
     }
   };
   // birthstoneSelect();
+
+  // function zodiacSelect() {
+  //   var celebBirthMonth;
+  //   var celebBirthDay;
+
+  //   if (celebBirthMonth === )
+
+
+  // };
+  // zodiacSelect();
 });
 
 
