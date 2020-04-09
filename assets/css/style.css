@@ -9,6 +9,9 @@ h2 {
   text-align: center;
   text-shadow: 2px 2px rgb(180, 180, 180);
 }
+h5 {
+  margin: 0 1.5rem 0 0;
+}
 input[type="submit"].button-primary {
   background-color: #ce1cc5;
   border-color: aqua;
@@ -17,9 +20,13 @@ input[type="submit"].button-primary {
 
 /* CLASS STYLES */
 .bordered {
-  border: 1px solid #888;
+  background-color: rgb(248, 248, 248);
+  border: 1px solid rgb(209, 207, 207);
   border-radius: 8px;
-  height: 300px;
+  padding: 1rem 1rem;
+}
+.button {
+  padding: 0rem 0.75rem;
 }
 .headerText {
   animation: blinking 1s infinite;
@@ -38,11 +45,76 @@ input[type="submit"].button-primary {
   background-size: cover;
   height: 275px;
 }
+.link {
+  color: #ffffff;
+  font-size: inherit;
+}
 .row {
-  margin: 0.5rem 1.5rem;
+  margin: 0 1rem;
+}
+.resultText {
+  color: rgb(255, 115, 0);
+  font-family: 'Kaushan Script', cursive;
+}
+
+/* ID STYLES */
+#celebImage {
+  max-height: 100%;
+  max-width: 100%;
+}
+/* birthstone IDs--colors the gemstone icon to match actual stone color: */
+#janGarnet {
+  filter: hue-rotate(150deg) saturate(70%);
+}
+#febAmethyst {
+  filter: hue-rotate(25deg);
+}
+#marBloodstone {
+  filter: hue-rotate(300deg);
+}
+#aprDiamond {
+  filter: hue-rotate(310deg) opacity(30%);
+}
+#mayEmerald {
+  filter: hue-rotate(230deg);
+}
+#junPearl {
+  filter: hue-rotate(310deg) opacity(30%) brightness(50%);
+}
+#julRuby {
+  filter: hue-rotate(130deg) saturate(300%);
+}
+#augPeridot {
+  filter: hue-rotate(190deg);
+}
+#sepSapphire {
+  filter: saturate(300%);
+}
+#octOpal {
+  filter: hue-rotate(310deg) opacity(30%) brightness(200%);
+}
+#novTopaz {
+  filter: hue-rotate(150deg);
+}
+#decTurquoise {
+  filter: hue-rotate(290deg);
+}
+/* social media IDs--provides the official RGB color value scheme for each social media site: */
+#facebook {
+  background-color: #3b5998;
+}
+#instagram {
+  background-color: #8a3ab9;
+}
+#pinterest {
+  background-color: #c8232c;
+}
+#twitter {
+  background-color: #00acee;
 }
 
 /* KEYFRAMES */
+/* displays blinking drop shadow behind banner text: */
 @keyframes blinking {
   0% { text-shadow: 2px 2px aqua; }
   100% { text-shadow: 2px 2px rgb(28, 133, 133); }
