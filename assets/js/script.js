@@ -18,7 +18,8 @@ let matchDescription = "";
 
 
 
-
+// SECONDARY API KEY FOR NAMEFACE API
+var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933d";
 
 
 // Settings and API call to namefaceapi
@@ -64,17 +65,15 @@ faceNameAPICall(settings);
 
 
 // Checking the facename matches in the imdb API
-var checkMatches = function (namefaceMatches) {
-
-    //wait = true;
+var checkMatches = function(namefaceMatches) {
+    
     //console.log("namefaceMatches array = ");
     //console.log(namefaceMatches);
-
-    //return new Promise((resolve, reject) => {        
-
+       
+    
     // LOOPING THROUGH ALL CELEBS ON LIST
-    for (var i = (namefaceMatches.length - 1); i >= 0; i--) {
-
+    for(var i = (namefaceMatches.length - 1); i >= 0; i--) {
+        
         const namefaceMatch = namefaceMatches[i];
         //console.log(namefaceMatch);
 
@@ -83,25 +82,25 @@ var checkMatches = function (namefaceMatches) {
         var space = " ";
         var spaceFill = "%20";
 
-        while (fixName.indexOf(space) > -1) {
+        while(fixName.indexOf(space) > -1) {
             fixName = fixName.replace(space, spaceFill);
         }
-
-
+            
+    
         var searchCeleb = fixName;
         // var searchCeleb = namefaceMatches[i];
         // var searchCeleb = "Nelson Mandela";
-
-
+    
+    
         var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
         //console.log(queryURL);
-
-
-
+    
+    
+    
         //imdbAPIcall(queryURL).then(postMatch);
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
-
-
+        
+        
 
     }
 
@@ -130,13 +129,9 @@ var checkMatches = function (namefaceMatches) {
     //     postMatch();
 
     // });
+    
+        
 
-
-    //wait = false;
-
-
-
-    //});
 };
 
 
@@ -213,15 +208,6 @@ var saveMatchData = function (name, imgURL, description) {
     console.log("matchDescription = " + matchDescription);
 }
 
-
-// Event listener to start search on form submission
-$("form").on("submit", function (event) {
-    event.preventDefault();
-    checkMatches();
-    console.log("Moving onto postMatch.")
-    postMatch();
-});
-
 var test = "Jimmy Smagula";
 wikiResult(test);
 
@@ -233,7 +219,6 @@ function wikiResult(matchName) {
 function fetchResult(searchQuery) {
     // var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
     var endpoint = `https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=jsonfm&search=${searchQuery}`;
-    https://en.wikipedia.org/w/api.php?action=opensearch&search=Hampi&limit=10&namespace=0&format=jsonfm
     console.log(endpoint);
     fetch(endpoint)
         .then(response => response.json())
