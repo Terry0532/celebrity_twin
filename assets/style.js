@@ -54,8 +54,8 @@ $(document).ready(function(){
 
 
 
-// NOTES FROM ISSUE14:
-// We'll need a rough JavaScript framework to make our HTML dynamic, so I will start building these template functions in the "style.js" (versus the "script.js") file. These can later be integrated into one stylesheet.//
+// NOTES FROM ISSUE16:
+// Variables and code need to be fleshed out to receive data from the API AJAX calls and pass them through for dynamic JavaScript. I will continue more of what I was working on with issue14.
 
 // TO-DO FOR JAVASCRIPT: (most of this will be pretty straight-forward once we determine what data we want to get from our API: all of the placeholder fields can exist in the HTML and just be displayed when needed)
 // • Make an array variable to take search items and set them into local storage.
