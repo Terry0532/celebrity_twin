@@ -132,6 +132,9 @@ input[type="submit"].button-primary {
 #errorCeleb {
   color: rgb(255, 115, 0);
 }
+#unicodePad {
+  padding-left: 0.75rem;
+}
 /* birthstone IDs (sets color of SVG gemstone image): */
 #janGarnet {
   filter: hue-rotate(150deg) saturate(70%);

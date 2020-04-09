@@ -12,7 +12,7 @@ $(document).ready(function(){
   // Adjusts color of birthstone icon to match birth month:
   function birthstoneSelect() {
 
-    var celebBirthMonth = "December";
+    var celebBirthMonth = "May";
 
     if (celebBirthMonth === "January") {
       $(".birthstone").attr("id", "janGarnet");
@@ -42,14 +42,55 @@ $(document).ready(function(){
   };
   birthstoneSelect();
 
-  // function zodiacSelect() {
-  //   var celebBirthMonth;
-  //   var celebBirthDay;
+  function zodiacSelect() {
+    // zodiac sign variables (in sequence):
+    var aries = "Aries <span id='unicodePad'>&#9800;</span>";
+    var taurus = "Taurus <span id='unicodePad'>&#9801;</span>";
+    var gemini = "Gemini <span id='unicodePad'>&#9802;</span>";
+    var cancer = "Cancer <span id='unicodePad'>&#9803;</span>";
+    var leo = "Leo <span id='unicodePad'>&#9804;</span>";
+    var virgo = "Virgo <span id='unicodePad'>&#9805;</span>";
+    var libra = "Libra <span id='unicodePad'>&#9806;</span>";
+    var scorpio = "Scorpio <span id='unicodePad'>&#9807;</span>";
+    var sagittarius = "Sagittarius <span id='unicodePad'>&#9808;</span>";
+    var capricorn = "Capricorn <span id='unicodePad'>&#9809;</span>";
+    var aquarius = "Aquarius <span id='unicodePad'>&#9810;</span>";
+    var pisces = "Pisces <span id='unicodePad'>&#9811;</span>";
+    var zodiacDate;
+    var zodiacMonth;
+    var zodiacName;
 
-  //   if (celebBirthMonth === )
-
-
-  // };
+    // determines zodiac sign based on birth date ranges:
+    if ((zodiacMonth === "March" && zodiacDate >= 21) || (zodiacMonth === "April" && zodiacDate < 20)) {
+      zodiacName = aries;
+    } else if ((zodiacMonth === "April" && zodiacDate >= 20) || (zodiacMonth === "May" && zodiacDate < 21)){
+      zodiacName = taurus;
+    } else if ((zodiacMonth === "May" && zodiacDate >= 21) || (zodiacMonth === "June" && zodiacDate < 21)){
+      zodiacName = gemini;
+    } else if ((zodiacMonth === "June" && zodiacDate >= 21) || (zodiacMonth === "July" && zodiacDate < 23)) {
+      zodiacName = cancer;
+    } else if ((zodiacMonth === "July" && zodiacDate >= 23) || (zodiacMonth === "August" && zodiacDate < 23)) {
+      zodiacName = leo;
+    } else if ((zodiacMonth === "August" && zodiacDate >= 23) || (zodiacMonth === "September" && zodiacDate < 23)) {
+      zodiacName = virgo;
+    } else if ((zodiacMonth === "September" && zodiacDate >= 23) || (zodiacMonth === "October" && zodiacDate < 23)) {
+      zodiacName = libra;
+    } else if ((zodiacMonth === "October" && zodiacDate >= 23) || (zodiacMonth === "November" && zodiacDate < 22)) {
+      zodiacName = scorpio;
+    } else if ((zodiacMonth === "November" && zodiacDate >= 22) || (zodiacMonth === "December" && zodiacDate < 22)) {
+      zodiacName = sagittarius;
+    } else if ((zodiacMonth === "December" && zodiacDate >= 22) || (zodiacMonth === "January" && zodiacDate < 20)) {
+      zodiacName = capricorn;
+    } else if ((zodiacMonth === "January" && zodiacDate >= 20) || (zodiacMonth === "February" && zodiacDate < 19)) {
+      zodiacName = aquarius;
+    } else if ((zodiacMonth === "February" && zodiacDate >= 19) || (zodiacMonth === "March" && zodiacDate < 21)) {
+      zodiacName = pisces;
+    } else {
+      return;
+    }
+    // displays zodiac name and sign:
+    $("#celebZodiac").html(zodiacName);
+  };
   // zodiacSelect();
 
   // for dispalying ERROR MODAL:
