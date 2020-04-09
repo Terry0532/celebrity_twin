@@ -50,6 +50,26 @@ $(document).ready(function(){
 
   // };
   // zodiacSelect();
+
+  // for dispalying ERROR MODAL:
+  function displayModal() {
+    var modal = $(".modal");
+    modal.addClass("modal-open");
+    // closes if X icon or button clicked:
+    $(".close-modal").on("click", function() {
+        modal.removeClass("modal-open");
+    });
+    // closes if clicked outside content area:
+    $(".modal-inner").on("click", function() {
+      modal.removeClass("modal-open");
+    });
+    // prevents modal inner from closing parent when clicked:
+    $(".modal-content").on("click", function(event) {
+      event.stopPropagation();
+    });
+  };
+  // displayModal();
+
 });
 
 
