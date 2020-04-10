@@ -1,7 +1,35 @@
 $(document).ready(function(){
+  // for dispalying ERROR MODAL:
+  function displayModal() {
+    var modal = $(".modal");
+    modal.addClass("modal-open");
+    // closes if X icon or button clicked:
+    $(".close-modal").on("click", function() {
+        modal.removeClass("modal-open");
+    });
+    // closes if clicked outside content area:
+    $(".modal-inner").on("click", function() {
+      modal.removeClass("modal-open");
+    });
+    // prevents modal inner from closing parent when clicked:
+    $(".modal-content").on("click", function(event) {
+      event.stopPropagation();
+    });
+  };
+  // displayModal();
+
+  var celebBirthDate;
+  var celebBirthMonth;
+  var celebName;
+
+  // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** // 
+  celebName = "Starlet O'Hara";
+  celebBirthDate = 13;
+  celebBirthMonth = "May";
 
   // Display search results:
   function dispResults() {
+
     // displays HORIZONTAL RULE to separate search from result:
     $("form").after("<hr>");
     // makes DISPLAY CARD visible:
@@ -9,81 +37,46 @@ $(document).ready(function(){
   };
   // dispResults();
 
-  // Adjusts color of birthstone icon to match birth month:
-  function birthstoneSelect() {
-    // birthstone variables (in alphabetical order):
-    var amethyst = "Amethyst <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, amethyst' class='unicodePad' id='febAmethyst'>";
-    var bloodstone = "Bloodstone <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, bloodstone' class='unicodePad' id='marBloodstone'>";
-    var diamond = "Diamond <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, diamond' class='unicodePad' id='aprDiamond'>";
-    var emerald = "Emerald <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, emerald' class='unicodePad' id='mayEmerald'>";
-    var garnet = "Garnet <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, garnet' class='unicodePad' id='janGarnet'>";
-    var opal = "Opal <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, opal' class='unicodePad' id='octOpal'>";
-    var pearl = "Pearl <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, pearl' class='unicodePad' id='junPearl'>";
-    var peridot = "Peridot <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, peridot' class='unicodePad' id='augPeridot'>";
-    var ruby = "Ruby <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, ruby' class='unicodePad' id='julRuby'>";
-    var sapphire = "Sapphire <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, sapphire' class='unicodePad' id='sepSapphire'>";
-    var topaz = "Topaz <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, topaz' class='unicodePad' id='novTopaz'>";
-    var turquoise = "Turquoise <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, turquoise' class='unicodePad' id='decTurquoise'>";
-
-    var birthstone;
-    var celebBirthMonth;
-
-    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** // 
-    celebBirthMonth = "May";
-
-    if (celebBirthMonth === "January") {
-      birthstone = garnet;
-    } else if (celebBirthMonth === "February") {
-      birthstone = amethyst;
-    } else if (celebBirthMonth === "March") {
-      birthstone = bloodstone;
-    } else if (celebBirthMonth === "April") {
-      birthstone = diamond;
-    } else if (celebBirthMonth === "May") {
-      birthstone = emerald;
-    } else if (celebBirthMonth === "June") {
-      birthstone = pearl;
-    } else if (celebBirthMonth === "July") {
-      birthstone = ruby;
-    } else if (celebBirthMonth === "August") {
-      birthstone = peridot;
-    } else if (celebBirthMonth === "September") {
-      birthstone = sapphire;
-    } else if (celebBirthMonth === "October") {
-      birthstone = opal;
-    } else if (celebBirthMonth === "November") {
-      birthstone = topaz;
-    } else if (celebBirthMonth === "December") {
-      birthstone = turquoise;
-    } else {
-      return;
-    }
-    $("#celebBirthstone").html(birthstone);
-  };
-  birthstoneSelect();
-
-  function zodiacSelect() {
-    // zodiac sign variables (in sequence):
-    var aries = "Aries <span class='unicodePad'>&#9800;</span>";
-    var taurus = "Taurus <span class='unicodePad'>&#9801;</span>";
-    var gemini = "Gemini <span class='unicodePad'>&#9802;</span>";
-    var cancer = "Cancer <span class='unicodePad'>&#9803;</span>";
-    var leo = "Leo <span class='unicodePad'>&#9804;</span>";
-    var virgo = "Virgo <span class='unicodePad'>&#9805;</span>";
-    var libra = "Libra <span class='unicodePad'>&#9806;</span>";
-    var scorpio = "Scorpio <span class='unicodePad'>&#9807;</span>";
-    var sagittarius = "Sagittarius <span class='unicodePad'>&#9808;</span>";
-    var capricorn = "Capricorn <span class='unicodePad'>&#9809;</span>";
-    var aquarius = "Aquarius <span class='unicodePad'>&#9810;</span>";
-    var pisces = "Pisces <span class='unicodePad'>&#9811;</span>";
+  function displayCelebName() {
+    var celebURL;
     
-    var zodiacDate;
-    var zodiacMonth;
-    var zodiacName;
+    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** // 
+    celebURL = "https://www.dictionary.com/browse/starlet";
+    
+    var displayName = "<a href='" + celebURL + "' target='_blank'>" + celebName + "</a>";
+    $("#celebResult").html(displayName);
+  };
+  displayCelebName();
 
-    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** //
-    zodiacDate = 13;
-    zodiacMonth = "May";
+  function displayDOB() {
+    var celebBirthYear;
+    
+    // **FOR DEMONSTRATIVE PURPOSES (comment out or delete later)** // 
+    celebBirthYear = 1996;
+    
+    var celebDOB = celebBirthDate + " " + celebBirthMonth + " " + celebBirthYear;
+    $("#celebDOB").text(celebDOB);
+  }
+  displayDOB();
+  
+  function zodiacSelect() {
+    // astrological sign variables:
+    var aquarius = "Aquarius <span class='unicodePad'>&#9810;</span>";
+    var aries = "Aries <span class='unicodePad'>&#9800;</span>";
+    var cancer = "Cancer <span class='unicodePad'>&#9803;</span>";
+    var capricorn = "Capricorn <span class='unicodePad'>&#9809;</span>";
+    var gemini = "Gemini <span class='unicodePad'>&#9802;</span>";
+    var leo = "Leo <span class='unicodePad'>&#9804;</span>";
+    var libra = "Libra <span class='unicodePad'>&#9806;</span>";
+    var pisces = "Pisces <span class='unicodePad'>&#9811;</span>";
+    var sagittarius = "Sagittarius <span class='unicodePad'>&#9808;</span>";
+    var scorpio = "Scorpio <span class='unicodePad'>&#9807;</span>";
+    var taurus = "Taurus <span class='unicodePad'>&#9801;</span>";
+    var virgo = "Virgo <span class='unicodePad'>&#9805;</span>";
+    // other variables:
+    var zodiacDate = celebBirthDate;
+    var zodiacMonth = celebBirthMonth;
+    var zodiacName;
 
     // determines zodiac sign based on birth date ranges:
     if ((zodiacMonth === "March" && zodiacDate >= 21) || (zodiacMonth === "April" && zodiacDate < 20)) {
@@ -113,30 +106,64 @@ $(document).ready(function(){
     } else {
       return;
     }
+
     // displays zodiac name and sign:
     $("#celebZodiac").html(zodiacName);
   };
   zodiacSelect();
+  
+  // Adjusts color of birthstone icon to match birth month:
+  function birthstoneSelect() {
+    // birthstone variables:
+    var amethyst = "Amethyst <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, amethyst' class='unicodePad' id='febAmethyst'>";
+    var bloodstone = "Bloodstone <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, bloodstone' class='unicodePad' id='marBloodstone'>";
+    var diamond = "Diamond <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, diamond' class='unicodePad' id='aprDiamond'>";
+    var emerald = "Emerald <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, emerald' class='unicodePad' id='mayEmerald'>";
+    var garnet = "Garnet <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, garnet' class='unicodePad' id='janGarnet'>";
+    var opal = "Opal <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, opal' class='unicodePad' id='octOpal'>";
+    var pearl = "Pearl <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, pearl' class='unicodePad' id='junPearl'>";
+    var peridot = "Peridot <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, peridot' class='unicodePad' id='augPeridot'>";
+    var ruby = "Ruby <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, ruby' class='unicodePad' id='julRuby'>";
+    var sapphire = "Sapphire <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, sapphire' class='unicodePad' id='sepSapphire'>";
+    var topaz = "Topaz <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, topaz' class='unicodePad' id='novTopaz'>";
+    var turquoise = "Turquoise <img src='./assets/images/gemstone.png' height='21.5px' alt='celebrity birthstone, turquoise' class='unicodePad' id='decTurquoise'>";
+    // other variables:
+    var birthMonth = celebBirthMonth;
+    var birthstone;
 
-  // for dispalying ERROR MODAL:
-  function displayModal() {
-    var modal = $(".modal");
-    modal.addClass("modal-open");
-    // closes if X icon or button clicked:
-    $(".close-modal").on("click", function() {
-        modal.removeClass("modal-open");
-    });
-    // closes if clicked outside content area:
-    $(".modal-inner").on("click", function() {
-      modal.removeClass("modal-open");
-    });
-    // prevents modal inner from closing parent when clicked:
-    $(".modal-content").on("click", function(event) {
-      event.stopPropagation();
-    });
+    // determines which gem gets linked to which month:
+    if (birthMonth === "January") {
+      birthstone = garnet;
+    } else if (birthMonth === "February") {
+      birthstone = amethyst;
+    } else if (birthMonth === "March") {
+      birthstone = bloodstone;
+    } else if (birthMonth === "April") {
+      birthstone = diamond;
+    } else if (birthMonth === "May") {
+      birthstone = emerald;
+    } else if (birthMonth === "June") {
+      birthstone = pearl;
+    } else if (birthMonth === "July") {
+      birthstone = ruby;
+    } else if (birthMonth === "August") {
+      birthstone = peridot;
+    } else if (birthMonth === "September") {
+      birthstone = sapphire;
+    } else if (birthMonth === "October") {
+      birthstone = opal;
+    } else if (birthMonth === "November") {
+      birthstone = topaz;
+    } else if (birthMonth === "December") {
+      birthstone = turquoise;
+    } else {
+      return;
+    }
+
+    // displays name and gem icon:
+    $("#celebBirthstone").html(birthstone);
   };
-  // displayModal();
-
+  birthstoneSelect();
 });
 
 
