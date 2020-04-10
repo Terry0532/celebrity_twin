@@ -228,5 +228,4 @@ function wikiResult(matchName) {
 function displayResults(results) {
     var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
     $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].snippet + '</a>');
-    // $("#wikiResultSnippet").html(results[0].snippet);
 }
