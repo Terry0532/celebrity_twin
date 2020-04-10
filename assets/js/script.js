@@ -30,7 +30,7 @@ var settings = {
     "method": "POST",
     "headers": {
         "x-rapidapi-host": "nameface.p.rapidapi.com",
-        "x-rapidapi-key": "efb61b9c88msh61f702c8cf22df2p177bebjsn84ac4de233ec",
+        "x-rapidapi-key": namefaceSecondaryAPIKey,
         "content-type": "application/json",
         "accept": "application/json"
     },
@@ -65,15 +65,15 @@ faceNameAPICall(settings);
 
 
 // Checking the facename matches in the imdb API
-var checkMatches = function(namefaceMatches) {
-    
+var checkMatches = function (namefaceMatches) {
+
     //console.log("namefaceMatches array = ");
     //console.log(namefaceMatches);
-       
-    
+
+
     // LOOPING THROUGH ALL CELEBS ON LIST
-    for(var i = (namefaceMatches.length - 1); i >= 0; i--) {
-        
+    for (var i = (namefaceMatches.length - 1); i >= 0; i--) {
+
         const namefaceMatch = namefaceMatches[i];
         //console.log(namefaceMatch);
 
@@ -82,25 +82,25 @@ var checkMatches = function(namefaceMatches) {
         var space = " ";
         var spaceFill = "%20";
 
-        while(fixName.indexOf(space) > -1) {
+        while (fixName.indexOf(space) > -1) {
             fixName = fixName.replace(space, spaceFill);
         }
-            
-    
+
+
         var searchCeleb = fixName;
         // var searchCeleb = namefaceMatches[i];
         // var searchCeleb = "Nelson Mandela";
-    
-    
+
+
         var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
         //console.log(queryURL);
-    
-    
-    
+
+
+
         //imdbAPIcall(queryURL).then(postMatch);
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
-        
-        
+
+
 
     }
 
@@ -129,8 +129,8 @@ var checkMatches = function(namefaceMatches) {
     //     postMatch();
 
     // });
-    
-        
+
+
 
 };
 
@@ -208,18 +208,14 @@ var saveMatchData = function (name, imgURL, description) {
     console.log("matchDescription = " + matchDescription);
 }
 
-var test = "Jimmy Smagula";
+//this is just a test, remove later
+var test = "Scarlett O'Hara";
 wikiResult(test);
 
-function wikiResult(matchName) {
-    console.log(matchName);
-    fetchResult(matchName);
-}
 
-function fetchResult(searchQuery) {
-    // var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
-    var endpoint = `https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=jsonfm&search=${searchQuery}`;
-    console.log(endpoint);
+//to find results from wikipedia api
+function wikiResult(matchName) {
+    var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${matchName}`;
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
@@ -228,6 +224,9 @@ function fetchResult(searchQuery) {
         });
 }
 
+//display wikipedia results
 function displayResults(results) {
-    console.log(results);
+    var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
+    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].title + '</a>');
+    $("#wikiResultSnippet").html(results[0].snippet);
 }
