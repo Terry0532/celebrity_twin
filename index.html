@@ -31,7 +31,10 @@
     </div>
   </div>
 
-
+  <label for="img">Select image:</label>
+  <input type="file" id="img" name="img" accept="image/*" class="uploadFile">
+  <button class="submitFile">submit</button>
+  <button class="deleteFile">delete</button>
   <!-- SEARCH INPUT -->
   <form class="container">
     <div class="row">
@@ -58,74 +61,75 @@
     </div>
   </form>
 
-    <!-- ERROR MODAL -->
-    <!-- by default hidden, triggered by displayModal(). -->
-    <div class="modal">
-      <div class="modal-inner">
-        <div class="modal-content">
-          <!-- "X" close icon -->
-          <div class="modal-close-icon">
-            <a href="javascript:void(0)" class="close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
-          </div>
-          <div class="modal-content-inner">
-            <h2>Whoops!</h2>
-            <p class="centeredText">We can't find <span id="errorCeleb">Mr. Errorpants</span>! Please check your spelling and try again.</p>  
-          </div>
-          <hr>
-          <div class="modal-buttons">
-            <button class="button button-primary close-modal link">sure thing</button>
-          </div>
+  <!-- ERROR MODAL -->
+  <!-- by default hidden, triggered by displayModal(). -->
+  <div class="modal">
+    <div class="modal-inner">
+      <div class="modal-content">
+        <!-- "X" close icon -->
+        <div class="modal-close-icon">
+          <a href="javascript:void(0)" class="close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+        <div class="modal-content-inner">
+          <h2>Whoops!</h2>
+          <p class="centeredText">We can't find <span id="errorCeleb">Mr. Errorpants</span>! Please check your spelling
+            and try again.</p>
+        </div>
+        <hr>
+        <div class="modal-buttons">
+          <button class="button button-primary close-modal link">sure thing</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- DISPLAY CARD -->
-    <!-- dynamically displays the results of search query (default display is hidden): -->
-    <!-- card header -->
-    <div class="container" id="results">
-      <h2 class="centerText">Search Results</h2>
-      <!-- card body -->
-      <div class="row bordered">
-        <!-- left-hand column -->
-        <div class="six columns">
-          <!-- CELEB NAME -->
-          <div class="row u-full-width">
-            <h5>Your celeb: <span class="resultText" id="celebResult"></span></h5>
-          </div>
-          <!-- CELEB DATE OF BIRTH -->
-          <div class="row u-full-width">
-            <h5>Date of birth: <span class="resultText" id="celebDOB"></span></h5>
-          </div>
-          <!-- CELEB BIRTHPLACE -->
-          <div class="row u-full-width">
-            <h5>Birthplace: <span class="resultText" id="celebBirthplace"></span></h5>
-          </div>
-          <!-- CELEB ZODIAC SIGN -->
-          <div class="row u-full-width">
-            <h5>Zodiac sign: <span class="resultText" id="celebZodiac"></span></h5>
-          </div>
-          <!-- CELEB BIRTHSTONE -->
-          <div class="row u-full-width">
-            <h5>Birthstone: <span class="resultText" id="celebBirthstone">  </span></h5>
-            
-          </div>
+  <!-- DISPLAY CARD -->
+  <!-- dynamically displays the results of search query (default display is hidden): -->
+  <!-- card header -->
+  <div class="container" id="results">
+    <h2 class="centerText">Search Results</h2>
+    <!-- card body -->
+    <div class="row bordered">
+      <!-- left-hand column -->
+      <div class="six columns">
+        <!-- CELEB NAME -->
+        <div class="row u-full-width">
+          <h5>Your celeb: <span class="resultText" id="celebResult"></span></h5>
+        </div>
+        <!-- CELEB DATE OF BIRTH -->
+        <div class="row u-full-width">
+          <h5>Date of birth: <span class="resultText" id="celebDOB"></span></h5>
+        </div>
+        <!-- CELEB BIRTHPLACE -->
+        <div class="row u-full-width">
+          <h5>Birthplace: <span class="resultText" id="celebBirthplace"></span></h5>
+        </div>
+        <!-- CELEB ZODIAC SIGN -->
+        <div class="row u-full-width">
+          <h5>Zodiac sign: <span class="resultText" id="celebZodiac"></span></h5>
         </div>
         <!-- CELEB BIRTHSTONE -->
         <div class="row u-full-width">
-          <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald </span><img
-              src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
-        </div>
-        <div class="row u-full-width">
-          <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
+          <h5>Birthstone: <span class="resultText" id="celebBirthstone"> </span></h5>
+
         </div>
       </div>
-      <!-- right-hand column -->
-      <div class="six columns">
-        <!-- CELEB IMAGE -->
-        <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
-          data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+      <!-- CELEB BIRTHSTONE -->
+      <div class="row u-full-width">
+        <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald </span><img src="./assets/images/gemstone.png"
+            height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
+      </div>
+      <div class="row u-full-width">
+        <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
       </div>
     </div>
+    <!-- right-hand column -->
+    <div class="six columns">
+      <!-- CELEB IMAGE -->
+      <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
+        data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+    </div>
+  </div>
   </div>
 
   <hr>
