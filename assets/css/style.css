@@ -150,6 +150,9 @@ input[type="submit"].button-primary {
 .mt {
   margin-top: 40px;
 }
+.d-none {
+  display: none;
+}
 
 /* ID STYLES */
 #celebImage {
