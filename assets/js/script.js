@@ -141,6 +141,10 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 
 // Posting the matched IMDb information to the webpage
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
+
+    //hide loading spinner
+    $(".loader").addClass("d-none");
+
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
@@ -210,14 +214,51 @@ function deleteUpload(deleteImageHash) {
         .catch(error => console.log('error', error));
 };
 
+function uploadImage($files) {
+    if ($files.length) {
 
+        var apiUrl = 'https://api.imgur.com/3/image';
+        var apiKey = '93e7eb73da70d74';
+
+        var settings = {
+            async: true,
+            crossDomain: true,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: apiUrl,
+            headers: {
+                Authorization: 'Client-ID ' + apiKey,
+                Accept: 'application/json'
+            },
+            mimeType: 'multipart/form-data'
+        };
+
+        var formData = new FormData();
+        formData.append("image", $files[0]);
+        settings.data = formData;
+
+        $.ajax(settings).done(function (response) {
+
+            //hide loading spinner
+            $(".loader").addClass("d-none");
+
+            uploadedImageUrl = JSON.parse(response).data.link;
+            $("#celebSearchInput").val(uploadedImageUrl);
+            deleteImageHash = JSON.parse(response).data.deletehash;
+        });
+    }
+}
 
 // EVENT LISTENERS
 
 // Event listener for a new search
 $("form").on("submit", function (event) {
     event.preventDefault();
-    console.log("Submission occured.");
+
+    //show loading spinner
+    $(".loader").removeClass("d-none");
+
     var imgURL = $("#celebSearchInput").val().trim();
     // MUTE WHEN NEEDING TO AVOID ADDING TO API CALL COUNT
     faceNameAPICall(imgURL);
@@ -252,36 +293,44 @@ $("#exampleRecipientInput").on("change", function () {
 $(document).on("click", ".submitFile", function (event) {
     event.preventDefault();
 
+    //show loading spinner
+    $(".loader").removeClass("d-none");
+
     var $files = $(".uploadFile").get(0).files;
 
-    if ($files.length) {
+    uploadImage($files);
+    // if ($files.length) {
 
-        var apiUrl = 'https://api.imgur.com/3/image';
-        var apiKey = '93e7eb73da70d74';
+    //     var apiUrl = 'https://api.imgur.com/3/image';
+    //     var apiKey = '93e7eb73da70d74';
 
-        var settings = {
-            async: false,
-            crossDomain: true,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: apiUrl,
-            headers: {
-                Authorization: 'Client-ID ' + apiKey,
-                Accept: 'application/json'
-            },
-            mimeType: 'multipart/form-data'
-        };
+    //     var settings = {
+    //         async: false,
+    //         crossDomain: true,
+    //         processData: false,
+    //         contentType: false,
+    //         type: 'POST',
+    //         url: apiUrl,
+    //         headers: {
+    //             Authorization: 'Client-ID ' + apiKey,
+    //             Accept: 'application/json'
+    //         },
+    //         mimeType: 'multipart/form-data'
+    //     };
 
-        var formData = new FormData();
-        formData.append("image", $files[0]);
-        settings.data = formData;
+    //     var formData = new FormData();
+    //     formData.append("image", $files[0]);
+    //     settings.data = formData;
 
-        $.ajax(settings).done(function (response) {
-            uploadedImageUrl = JSON.parse(response).data.link;
-            $("#celebSearchInput").val(uploadedImageUrl);
-            deleteImageHash = JSON.parse(response).data.deletehash;
-        });
-    }
+    //     $.ajax(settings).done(function (response) {
+
+    //         //hide loading spinner
+    //         $(".loader").addClass("d-none");
+
+    //         uploadedImageUrl = JSON.parse(response).data.link;
+    //         $("#celebSearchInput").val(uploadedImageUrl);
+    //         deleteImageHash = JSON.parse(response).data.deletehash;
+    //     });
+    // }
 });
 
