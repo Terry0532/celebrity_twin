@@ -35,7 +35,7 @@ var settings = {
         "accept": "application/json"
     },
     "processData": false,
-    "data": "{  \"images\": [    \"https://cdn.vox-cdn.com/thumbor/DD8bzlNVAfCggIXvTTvIiG7m2Xw=/0x0:1200x800/1200x800/filters:focal(396x247:588x439)/cdn.vox-cdn.com/uploads/chorus_image/image/65111486/pewds.0.jpg\",\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
+    "data": "{  \"images\": [\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
 }
 
 
@@ -45,14 +45,14 @@ var faceNameAPICall = function (settings) {
 
         console.log(response);
         // Matching names of Alex's photo
-        namefaceMatches = [response.images[1].results[0].matches[0].name,
-        response.images[1].results[0].matches[1].name,
-        response.images[1].results[0].matches[2].name,
-        response.images[1].results[0].matches[3].name,
-        response.images[1].results[0].matches[4].name,
-        response.images[1].results[0].matches[5].name,
-        response.images[1].results[0].matches[6].name,
-        response.images[1].results[0].matches[7].name];
+        namefaceMatches = [response.images[0].results[0].matches[0].name,
+        response.images[0].results[0].matches[1].name,
+        response.images[0].results[0].matches[2].name,
+        response.images[0].results[0].matches[3].name,
+        response.images[0].results[0].matches[4].name,
+        response.images[0].results[0].matches[5].name,
+        response.images[0].results[0].matches[6].name,
+        response.images[0].results[0].matches[7].name];
 
 
         checkMatches(namefaceMatches);
