@@ -292,6 +292,7 @@ $("#exampleRecipientInput").on("change", function () {
 // When user clicks to upload an image
 $(document).on("click", ".submitFile", function (event) {
     event.preventDefault();
+    $(".loader").attr("hidden", false);
 
     //show loading spinner
     $("#uploadSpinner").removeClass("d-none");
