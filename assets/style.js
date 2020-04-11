@@ -185,5 +185,9 @@ $(document).ready(function(){
 //   • Birthstone
 // The displayResultsField() function has been kept modular to allow for if/then statements to skip past any field for which no data is available.
 
-  // TO-DO FOR JAVASCRIPT: (most of this will be pretty straight-forward once we determine what data we want to get from our API: all of the placeholder fields can exist in the HTML and just be displayed when needed)
-// • Make an array variable to take search items and set them into local storage.
+  // TO-DO FOR JAVASCRIPT:
+  // • Create dummy pages for social media links.
+  // • Integrate the variables created in script.js to get and set data in local storage.
+
+// NOTES FROM ISSUE #24, "DUMMY LINK PAGES":
+// "I've decided to create a few dummy 'link' pages for the social media buttons on the splash page. These will be for no other reason than demonstration."
