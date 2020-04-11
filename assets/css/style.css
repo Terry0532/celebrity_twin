@@ -41,6 +41,10 @@ input[type="submit"].button-primary {
 .button {
   padding: 0rem 0.75rem;
 }
+.button-primary {
+  font-size: inherit;
+  margin-bottom: 1.5rem;
+}
 .centerText {
   text-align: center;
 }
@@ -143,6 +147,11 @@ input[type="submit"].button-primary {
 }
 #errorCeleb {
   color: rgb(255, 115, 0);
+}
+#imageCaption {
+  color: #ce1cc5;
+  font-size: 16px;
+  text-align: center;
 }
 /* birthstone IDs (sets color of SVG gemstone image): */
 #janGarnet {

@@ -33,14 +33,19 @@
     </div>
   </div>
 
-  <label for="img">Select image:</label>
-  <input type="file" id="img" name="img" accept="image/*" class="uploadFile">
-  <button class="submitFile">submit</button>
+
   <!-- SEARCH INPUT -->
   <form class="container">
     <div class="row">
+      <div class="twelve columns u-full-width">
+      <label for="img">Get your celeb URL from an image:</label>
+      <input type="file" id="img" name="img" accept="image/*" class="uploadFile">
+      <input type="submit" class="button-primary submitFile"></input>
+      </div>
+    </div>
+    <div class="row">
       <div class="six columns">
-        <label for="celebSearchInput">Search for a Celeb!</label>
+        <label for="celebSearchInput">Your search URL:</label>
         <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
       </div>
       <!-- SEARCH HISTORY -->
@@ -91,27 +96,43 @@
     <h2 class="centerText">Search Results</h2>
     <!-- card body -->
     <div class="row bordered">
-      <!-- left-hand column -->
+
+      <!-- LEFT COLUMN -->
       <div class="six columns">
-        <!-- CELEB NAME -->
+        <!-- celeb name -->
         <div class="row u-full-width">
           <h5>Your celeb: <span class="resultText" id="celebResult"></span></h5>
         </div>
-        <!-- CELEB DATE OF BIRTH -->
-        <div class="row u-full-width">
+        <!-- celeb date of birth (if available) -->
+        <div class="row u-full-width" hidden>
           <h5>Date of birth: <span class="resultText" id="celebDOB"></span></h5>
         </div>
-        <!-- CELEB BIRTHPLACE -->
-        <div class="row u-full-width">
+        <!-- celeb birthplace (if available) -->
+        <div class="row u-full-width" hidden>
           <h5>Birthplace: <span class="resultText" id="celebBirthplace"></span></h5>
         </div>
-        <!-- CELEB ZODIAC SIGN -->
-        <div class="row u-full-width">
+        <!-- celeb zodiac sign (if date of birth is available) -->
+        <div class="row u-full-width" hidden>
           <h5>Zodiac sign: <span class="resultText" id="celebZodiac"></span></h5>
         </div>
-        <!-- CELEB BIRTHSTONE -->
-        <div class="row u-full-width">
+        <!-- celeb birthstone (if date of birth is available) -->
+        <div class="row u-full-width" hidden>
           <h5>Birthstone: <span class="resultText" id="celebBirthstone"> </span></h5>
+        </div>
+        <!-- celeb Wikipedia result -->
+        <div class="row u-full-width">
+          <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="six columns">
+        <!-- celebrity image -->
+        <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
+        data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+        <!-- image caption -->
+        <div class="row u-full-width">
+          <h5 id="imageCaption">test</h5>
 
         </div>
       </div>
@@ -131,7 +152,8 @@
         data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
     </div>
   </div>
-  </div>
+  <!-- </div> -->
+
 
   <hr>
 
