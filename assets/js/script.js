@@ -140,7 +140,8 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 };
 
 // Posting the matched IMDb information to the webpage
-var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
+var postMatch = function ({ matchName, matchImgURL, matchDescription }) {  
+    $(".loader").attr("hidden", true);
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
@@ -217,6 +218,7 @@ function deleteUpload(deleteImageHash) {
 // Event listener for a new search
 $("form").on("submit", function (event) {
     event.preventDefault();
+    $(".loader").attr("hidden", false);
     console.log("Submission occured.");
     var imgURL = $("#celebSearchInput").val().trim();
     // MUTE WHEN NEEDING TO AVOID ADDING TO API CALL COUNT
@@ -251,6 +253,7 @@ $("#exampleRecipientInput").on("change", function () {
 // When user clicks to upload an image
 $(document).on("click", ".submitFile", function (event) {
     event.preventDefault();
+    $(".loader").attr("hidden", false);
 
     var $files = $(".uploadFile").get(0).files;
 
@@ -278,10 +281,13 @@ $(document).on("click", ".submitFile", function (event) {
         settings.data = formData;
 
         $.ajax(settings).done(function (response) {
+            
+        $(".loader").attr("hidden", true);
             uploadedImageUrl = JSON.parse(response).data.link;
             $("#celebSearchInput").val(uploadedImageUrl);
             deleteImageHash = JSON.parse(response).data.deletehash;
-        });
+        });    
     }
+
 });
 
