@@ -144,7 +144,7 @@ var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
 
     //hide loading spinner
     $("#submitSpinner").addClass("d-none");
-
+  
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
@@ -292,6 +292,7 @@ $("#exampleRecipientInput").on("change", function () {
 // When user clicks to upload an image
 $(document).on("click", ".submitFile", function (event) {
     event.preventDefault();
+    $(".loader").attr("hidden", false);
 
     //show loading spinner
     $("#uploadSpinner").removeClass("d-none");
