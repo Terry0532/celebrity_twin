@@ -26,43 +26,42 @@ localStorage.clear();
 // FUNCTIONS
 
 // Settings and API call to namefaceapi
-var faceNameAPICall = function (imgURL) {
-    
-    console.log(imgURL);
+
+    // IN SETTINGS FIND WAY TO USE displayModal FUNCTION WHEN ERROR OCCURS
+
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://nameface.p.rapidapi.com/recognize",
+    "method": "POST",
+    "headers": {
+        "x-rapidapi-host": "nameface.p.rapidapi.com",
+        "x-rapidapi-key": namefaceSecondaryAPIKey,
+        "content-type": "application/json",
+        "accept": "application/json"
+    },
+    "processData": false,
+    "data": "{  \"images\": [\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
+}
 
     if(imgURL === ""){
         console.log("Search was empty!");
         return;
     }
 
-    // IN SETTINGS FIND WAY TO USE displayModal FUNCTION WHEN ERROR OCCURS
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://nameface.p.rapidapi.com/recognize",
-        "method": "POST",
-        "headers": {
-            "x-rapidapi-host": "nameface.p.rapidapi.com",
-            "x-rapidapi-key": "efb61b9c88msh61f702c8cf22df2p177bebjsn84ac4de233ec",
-            "content-type": "application/json",
-            "accept": "application/json"
-        },
-        "processData": false,
-        "data": "{  \"images\": [    \"https://cdn.vox-cdn.com/thumbor/DD8bzlNVAfCggIXvTTvIiG7m2Xw=/0x0:1200x800/1200x800/filters:focal(396x247:588x439)/cdn.vox-cdn.com/uploads/chorus_image/image/65111486/pewds.0.jpg\",\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
-    }
 
     $.ajax(settings).done(function (response) {
 
         console.log(response);
         // Matching names of Alex's photo
-        namefaceMatches = [response.images[1].results[0].matches[0].name,
-        response.images[1].results[0].matches[1].name,
-        response.images[1].results[0].matches[2].name,
-        response.images[1].results[0].matches[3].name,
-        response.images[1].results[0].matches[4].name,
-        response.images[1].results[0].matches[5].name,
-        response.images[1].results[0].matches[6].name,
-        response.images[1].results[0].matches[7].name];
+        namefaceMatches = [response.images[0].results[0].matches[0].name,
+        response.images[0].results[0].matches[1].name,
+        response.images[0].results[0].matches[2].name,
+        response.images[0].results[0].matches[3].name,
+        response.images[0].results[0].matches[4].name,
+        response.images[0].results[0].matches[5].name,
+        response.images[0].results[0].matches[6].name,
+        response.images[0].results[0].matches[7].name];
 
 
         checkMatches(namefaceMatches);
@@ -73,6 +72,7 @@ var faceNameAPICall = function (imgURL) {
 
 
 // Checking the facename matches in the imdb API
+
 var checkMatches = function(namefaceMatches) {
     
     // LOOPING THROUGH ALL CELEBS ON LIST
@@ -82,6 +82,7 @@ var checkMatches = function(namefaceMatches) {
         //     return;
         // }
 
+
         const namefaceMatch = namefaceMatches[i];
 
         // Name is swapped to replace spaces with "%20" in order to pass the whole name through the api search
@@ -89,9 +90,10 @@ var checkMatches = function(namefaceMatches) {
         var space = " ";
         var spaceFill = "%20";
 
-        while(fixName.indexOf(space) > -1) {
+        while (fixName.indexOf(space) > -1) {
             fixName = fixName.replace(space, spaceFill);
         }
+      
         var searchCeleb = fixName;
     
         var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
@@ -99,6 +101,7 @@ var checkMatches = function(namefaceMatches) {
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
         
     }
+
 };
 
 
@@ -170,19 +173,15 @@ var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
 };
 
 
-// WIKIPEDIA TEST
-// var test = "Jimmy Smagula";
-// wikiResult(test);
 
+//this is just a test, remove later
+var test = "Scarlett O'Hara";
+wikiResult(test);
+
+
+//to find results from wikipedia api
 function wikiResult(matchName) {
-    console.log(matchName);
-    fetchResult(matchName);
-}
-
-function fetchResult(searchQuery) {
-    // var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${searchQuery}`;
-    var endpoint = `https://en.wikipedia.org/w/api.php?action=opensearch&limit=10&namespace=0&format=jsonfm&search=${searchQuery}`;
-    console.log(endpoint);
+    var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${matchName}`;
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
@@ -191,7 +190,9 @@ function fetchResult(searchQuery) {
         });
 }
 
+//display wikipedia results
 function displayResults(results) {
+
     console.log(results);
 }
 
@@ -283,3 +284,6 @@ var saveMatchHistory = function(searchedName) {
 
 };
 
+    var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
+    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].snippet + '</a>');
+}

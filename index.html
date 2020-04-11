@@ -1,31 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- // FONTS & ICONS // -->
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- // CSS STYLESHEETS // -->
-    <!-- Skeleton -->
-    <!-- (to reset CSS styles) -->
-    <link rel="stylesheet" href="./assets/css/normalize.css">
-    <!-- (to load Skeleton) -->
-    <link rel="stylesheet" href="./assets/css/skeleton.css">
-    <!-- individual styles -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- // FONTS & ICONS // -->
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- // CSS STYLESHEETS // -->
+  <!-- Skeleton -->
+  <!-- (to reset CSS styles) -->
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <!-- (to load Skeleton) -->
+  <link rel="stylesheet" href="./assets/css/skeleton.css">
+  <!-- individual styles -->
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-    <title>Celebrity Twin</title>
-  </head>
+  <title>Celebrity Twin</title>
+</head>
 
-  <body>
-    <!-- JUMBOTRON -->
-    <div class="container jumbotron u-full-width" data-attribution="Photo by Andi ~ Kernel ˈkaːɔs on Unsplash">
-      <div class="twelve columns headerText">
-        <p>Celebrity Twin!</p>
+<body>
+  <!-- JUMBOTRON -->
+  <div class="container jumbotron u-full-width" data-attribution="Photo by Andi ~ Kernel ˈkaːɔs on Unsplash">
+    <div class="twelve columns headerText">
+      <p>Celebrity Twin!</p>
+    </div>
+  </div>
+
+  <!-- SEARCH INPUT -->
+  <form class="container">
+    <div class="row">
+      <div class="six columns">
+        <label for="celebSearchInput">Search for a Celeb!</label>
+        <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
+      </div>
+      <!-- SEARCH HISTORY -->
+      <!-- drop-down list dynamically generates a list of most recent searches, list items pulled from local storage -->
+      <div class="six columns">
+        <label for="exampleRecipientInput">Previous Searches</label>
+        <select class="u-full-width" id="exampleRecipientInput">
+          <option value="Option 1">No Recent Searches</option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </select>
+      </div>
+    </div>
+    <!-- SUBMIT BUTTON -->
+    <div class="row">
+      <div class="four columns">
+        <input class="button-primary u-full-width" type="submit" value="submit" id="submitBtn">
+      </div>
+    </div>
+  </form>
+
+    <!-- ERROR MODAL -->
+    <!-- by default hidden, triggered by displayModal(). -->
+    <div class="modal">
+      <div class="modal-inner">
+        <div class="modal-content">
+          <!-- "X" close icon -->
+          <div class="modal-close-icon">
+            <a href="javascript:void(0)" class="close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+          </div>
+          <div class="modal-content-inner">
+            <h2>Whoops!</h2>
+            <p class="centeredText">We can't find <span id="errorCeleb">Mr. Errorpants</span>! Please check your spelling and try again.</p>  
+          </div>
+          <hr>
+          <div class="modal-buttons">
+            <button class="button button-primary close-modal link">sure thing</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -36,6 +83,7 @@
           <label for="celebSearchInput">Search for a Celeb!</label>
           <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
         </div>
+
         <!-- SEARCH HISTORY -->
         <!-- drop-down list dynamically generates a list of most recent searches, list items pulled from local storage -->
         <div class="six columns">
@@ -45,12 +93,15 @@
             <!--<option value="Option 2"></option>
             <option value="Option 3"></option>-->
           </select>
+
+        <!-- CELEB DATE OF BIRTH -->
+        <div class="row u-full-width">
+          <h5>Date of birth: <span class="resultText" id="celebDOB">13 May 1996</span></h5>
+
         </div>
-      </div>
-      <!-- SUBMIT BUTTON -->
-      <div class="row">
-        <div class="four columns">
-          <input class="button-primary u-full-width" type="submit" value="submit" id="submitBtn">
+        <!-- CELEB BIRTHPLACE -->
+        <div class="row u-full-width">
+          <h5>Birthplace: <span class="resultText" id="celebBirthplace">Area 51</span></h5>
         </div>
       </div>
     </form>
@@ -59,66 +110,77 @@
     <!-- dynamically displays the results of search query (default display is hidden): -->
     <!-- card header -->
     <div class="container" id="results">
-      <h2>Search Results</h2>
+      <h2 class="centerText">Search Results</h2>
       <!-- card body -->
       <div class="row bordered">
         <!-- left-hand column -->
         <div class="six columns">
           <!-- CELEB NAME -->
           <div class="row u-full-width">
-            <h5>Your celeb: <span class="resultText" id="celebResult">Starlette O'Hara</span></h5>
+            <h5>Your celeb: <span class="resultText" id="celebResult"></span></h5>
           </div>
           <!-- CELEB DATE OF BIRTH -->
           <div class="row u-full-width">
-            <h5>Date of birth: <span class="resultText" id="celebDOB">13 May 1996</span></h5>
+            <h5>Date of birth: <span class="resultText" id="celebDOB"></span></h5>
           </div>
           <!-- CELEB BIRTHPLACE -->
           <div class="row u-full-width">
-            <h5>Birthplace: <span class="resultText" id="celebBirthplace">Area 51</span></h5>
+            <h5>Birthplace: <span class="resultText" id="celebBirthplace"></span></h5>
           </div>
           <!-- CELEB ZODIAC SIGN -->
           <div class="row u-full-width">
-            <h5>Zodiac sign: <span class="resultText" id="celebZodiac">Taurus  <span id="astrologyUnicode">&#9801;</span></span></h5>
+            <h5>Zodiac sign: <span class="resultText" id="celebZodiac"></span></h5>
           </div>
           <!-- CELEB BIRTHSTONE -->
           <div class="row u-full-width">
-            <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald  </span><img src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
+            <h5>Birthstone: <span class="resultText" id="celebBirthstone">  </span></h5>
+            
           </div>
         </div>
-        <!-- right-hand column -->
-        <div class="six columns">
-          <!-- CELEB IMAGE -->
-          <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity" data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+        <!-- CELEB BIRTHSTONE -->
+        <div class="row u-full-width">
+          <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald </span><img
+              src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
         </div>
+        <div class="row u-full-width">
+          <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
+        </div>
+      </div>
+      <!-- right-hand column -->
+      <div class="six columns">
+        <!-- CELEB IMAGE -->
+        <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
+          data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
       </div>
     </div>
+  </div>
 
-    <hr>
+  <hr>
 
-    <!-- MEDIA LINKS -->
-    <div class="container">
-      <div class="row">
-        <div class="twelve columns">
-          <p>Like your results? Connect with us online to share!</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="three columns u-max-full-width">
-          <a class="button link" href="#" id="facebook"><i class="fa fa-facebook-square"></i>  Facebook</a>
-        </div>
-        <div class="three columns u-max-full-width">
-          <a class="button link" href="#" id="twitter"><i class="fa fa-twitter"></i>  Twitter</a>
-        </div>
-        <div class="three columns u-max-full-width">
-          <a class="button link" href="#" id="instagram"><i class="fa fa-instagram"></i>  Instagram</a>
-        </div>
-        <div class="three columns u-max-full-width">
-          <a class="button link" href="#" id="pinterest"><i class="fa fa-pinterest"></i>  Pinterest</a>
-        </div>
+  <!-- MEDIA LINKS -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns">
+        <p>Like your results? Connect with us online to share!</p>
       </div>
     </div>
+    <div class="row">
+      <div class="three columns u-max-full-width">
+        <a class="button link" href="#" id="facebook"><i class="fa fa-facebook-square"></i> Facebook</a>
+      </div>
+      <div class="three columns u-max-full-width">
+        <a class="button link" href="#" id="twitter"><i class="fa fa-twitter"></i> Twitter</a>
+      </div>
+      <div class="three columns u-max-full-width">
+        <a class="button link" href="#" id="instagram"><i class="fa fa-instagram"></i> Instagram</a>
+      </div>
+      <div class="three columns u-max-full-width">
+        <a class="button link" href="#" id="pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
+      </div>
+    </div>
+  </div>
 
-    <hr>
+  <hr>
 
   <footer></footer>
 
@@ -128,6 +190,7 @@
   <!-- individual styles -->
   <script src="./assets/js/script.js"></script>
   <script src="./assets/style.js"></script>
-    
-  </body>
+
+</body>
+
 </html>
