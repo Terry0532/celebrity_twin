@@ -1,0 +1,55 @@
+/* ELEMENT STYLES */
+body {
+  margin: 0;
+}
+h1 {
+  font-size: 40px;
+  height: 400px;
+}
+html {
+  background-color: black;
+}
+
+/* CLASS STYLES */
+.background {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  margin: 0;
+  padding-top: 40px;
+  width: 100%;
+}
+.centeredText {
+  text-align: center;
+}
+.copyright {
+  color: #ffffff;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  text-align: right;
+  font-size: 14px;
+  margin: 0 2rem;
+  vertical-align: middle;
+}
+.kaushan {
+  font-family: 'Kaushan Script', cursive;
+  margin-top: 0;
+}
+.textWhite {
+  color: #ffffff;
+  text-shadow: 2px 2px #ce1cc5;
+}
+
+/* ID STYLES */
+#facebook {
+  background-image: url("https://i.pinimg.com/originals/7b/65/ef/7b65ef29be453ba78e00b78ee71cfc73.jpg");
+}
+#instagram {
+  background-image: url("https://clipart.info/images/ccovers/1522452763instagram-logo-background.png");
+}
+#pinterest {
+  background-image: url("https://www.norebbo.com/wp-content/uploads/2013/05/pinterest_logo.jpg");
+}
+#twitter {
+  background-image: url("https://img.freepik.com/free-vector/illuminated-neon-icons-background_52683-29716.jpg?size=626&ext=jpg");
+}
