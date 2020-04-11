@@ -161,7 +161,7 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 
 // Posting the matched celebrity information to the webpage
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
-   // wikiResult(matchName);
+    // wikiResult(matchName);
     // Checking what match results were stored for this search
     console.log("Mark!");
     console.log("Posting the true match information!");
@@ -289,29 +289,6 @@ $(document).on("click", ".submitFile", function (event) {
 
     var $files = $(".uploadFile").get(0).files;
 
-
-};
-
-
-// FUNCTION USED FOR TESTING, provide name, imgurl and image description
-var quickTest = function (matchName, matchImgURL, matchDescription) {
-    // wikiResult(matchName);
-     // Checking what match results were stored for this search
-     console.log("Mark!");
-     console.log("Posting the true match information!");
-     console.log("matchName = " + matchName);
-     console.log("matchImgURL = " + matchImgURL);
-     console.log("matchDescription = " + matchDescription);
- 
-     // Appending the data to the html card
-     $("#celebResult").html(matchName);
-     $("#celebImage").attr("src", matchImgURL);
-     $("#celebDOB").html(matchDescription);
-     saveMatchHistory(matchName);
-     // ADD IN WIKIPEDIA RESULT!
-     wikiResult(matchName);
- };
-
     if ($files.length) {
         console.log("uploading");
 
@@ -372,4 +349,3 @@ function deleteUpload(deleteImageHash) {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }
-
