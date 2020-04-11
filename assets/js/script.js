@@ -44,11 +44,13 @@ var settings = {
     "data": "{  \"images\": [\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
 }
 
+
+var faceNameAPICall = function(imgURL) {
+
     if(imgURL === ""){
         console.log("Search was empty!");
-        return;
+        //return;
     }
-
 
     $.ajax(settings).done(function (response) {
 
@@ -170,6 +172,8 @@ var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
     $("#celebImage").attr("src", matchImgURL);
     $("#celebDOB").html(matchDescription);
     saveMatchHistory(matchName);
+    // ADD IN WIKIPEDIA RESULT!
+    wikiResult(matchName);
 };
 
 
@@ -194,6 +198,10 @@ function wikiResult(matchName) {
 function displayResults(results) {
 
     console.log(results);
+
+    var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
+    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].snippet + '</a>');
+
 }
 
 // Event listener for a new search
@@ -283,7 +291,3 @@ var saveMatchHistory = function(searchedName) {
 
 
 };
-
-    var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
-    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].snippet + '</a>');
-}
