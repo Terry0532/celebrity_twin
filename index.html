@@ -55,6 +55,7 @@
     </div>
   </form>
 
+<<<<<<< HEAD
   <!-- DISPLAY CARD -->
   <!-- dynamically displays the results of search query (default display is hidden): -->
   <!-- card header -->
@@ -67,6 +68,35 @@
         <!-- CELEB NAME -->
         <div class="row u-full-width">
           <h5>Your celeb: <span class="resultText" id="celebResult">Starlette O'Hara</span></h5>
+=======
+    <!-- ERROR MODAL -->
+    <!-- by default hidden, triggered by displayModal(). -->
+    <div class="modal">
+      <div class="modal-inner">
+        <div class="modal-content">
+          <!-- "X" close icon -->
+          <div class="modal-close-icon">
+            <a href="javascript:void(0)" class="close-modal"><i class="fa fa-times" aria-hidden="true"></i></a>
+          </div>
+          <div class="modal-content-inner">
+            <h2>Whoops!</h2>
+            <p class="centeredText">We can't find <span id="errorCeleb">Mr. Errorpants</span>! Please check your spelling and try again.</p>  
+          </div>
+          <hr>
+          <div class="modal-buttons">
+            <button class="button button-primary close-modal link">sure thing</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH INPUT -->
+    <form class="container">
+      <div class="row">
+        <div class="six columns">
+          <label for="celebSearchInput">Search for a Celeb!</label>
+          <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
+>>>>>>> ef42eff34d6db1b0845d48e6caecb08cd8da9499
         </div>
         <!-- CELEB DATE OF BIRTH -->
         <div class="row u-full-width">
@@ -76,10 +106,46 @@
         <div class="row u-full-width">
           <h5>Birthplace: <span class="resultText" id="celebBirthplace">Area 51</span></h5>
         </div>
+<<<<<<< HEAD
         <!-- CELEB ZODIAC SIGN -->
         <div class="row u-full-width">
           <h5>Zodiac sign: <span class="resultText" id="celebZodiac">Taurus <span
                 id="astrologyUnicode">&#9801;</span></span></h5>
+=======
+      </div>
+    </form>
+
+    <!-- DISPLAY CARD -->
+    <!-- dynamically displays the results of search query (default display is hidden): -->
+    <!-- card header -->
+    <div class="container" id="results">
+      <h2 class="centerText">Search Results</h2>
+      <!-- card body -->
+      <div class="row bordered">
+        <!-- left-hand column -->
+        <div class="six columns">
+          <!-- CELEB NAME -->
+          <div class="row u-full-width">
+            <h5>Your celeb: <span class="resultText" id="celebResult"></span></h5>
+          </div>
+          <!-- CELEB DATE OF BIRTH -->
+          <div class="row u-full-width">
+            <h5>Date of birth: <span class="resultText" id="celebDOB"></span></h5>
+          </div>
+          <!-- CELEB BIRTHPLACE -->
+          <div class="row u-full-width">
+            <h5>Birthplace: <span class="resultText" id="celebBirthplace"></span></h5>
+          </div>
+          <!-- CELEB ZODIAC SIGN -->
+          <div class="row u-full-width">
+            <h5>Zodiac sign: <span class="resultText" id="celebZodiac"></span></h5>
+          </div>
+          <!-- CELEB BIRTHSTONE -->
+          <div class="row u-full-width">
+            <h5>Birthstone: <span class="resultText" id="celebBirthstone">  </span></h5>
+            
+          </div>
+>>>>>>> ef42eff34d6db1b0845d48e6caecb08cd8da9499
         </div>
         <!-- CELEB BIRTHSTONE -->
         <div class="row u-full-width">

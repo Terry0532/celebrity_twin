@@ -1,4 +1,18 @@
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Element Styles
+- Class Styles
+    • Modal Class Styles
+- ID Styles
+    • Birthstone ID Styles
+    • Social Media ID Styles
+- Keyframes
+ ––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
 /* ELEMENT STYLES */
+a {
+  color: #ce1cc5;
+}
 body {
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-size: 2.25rem;
@@ -6,7 +20,6 @@ body {
 h2 {
   color: red;
   font-family: 'Kaushan Script', cursive;
-  text-align: center;
   text-shadow: 2px 2px rgb(180, 180, 180);
 }
 h5 {
@@ -27,6 +40,9 @@ input[type="submit"].button-primary {
 }
 .button {
   padding: 0rem 0.75rem;
+}
+.centerText {
+  text-align: center;
 }
 .headerText {
   animation: blinking 1s infinite;
@@ -56,13 +72,73 @@ input[type="submit"].button-primary {
   color: rgb(255, 115, 0);
   font-family: 'Kaushan Script', cursive;
 }
+.unicodePad {
+  padding-left: 0.75rem;
+}
+/* modal classes */
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  visibility: hidden;
+  backface-visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+.modal-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.modal-buttons-seperator {
+  margin: 1.5em 0;
+  margin-top: 0;
+}
+.modal-close-icon {
+  position: absolute;
+  right: 1.5em;
+}
+.modal-content {
+  border-radius: 8px;
+  background-color: white;
+  max-width: 35em;
+  padding: 1em 1.5em;
+  position: relative;
+  margin: 2em;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.35);
+}
+.modal-content-inner {
+  padding-right: 2em;
+  margin-bottom: 0.25em;
+}
+.modal-inner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-open {
+  visibility: visible;
+  backface-visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
 
 /* ID STYLES */
 #celebImage {
   max-height: 100%;
   max-width: 100%;
 }
-/* birthstone IDs--colors the gemstone icon to match actual stone color: */
+#errorCeleb {
+  color: rgb(255, 115, 0);
+}
+/* birthstone IDs (sets color of SVG gemstone image): */
 #janGarnet {
   filter: hue-rotate(150deg) saturate(70%);
 }
@@ -99,7 +175,7 @@ input[type="submit"].button-primary {
 #decTurquoise {
   filter: hue-rotate(290deg);
 }
-/* social media IDs--provides the official RGB color value scheme for each social media site: */
+/* social media IDs--set the official RGB color value for each social media site: */
 #facebook {
   background-color: #3b5998;
 }
