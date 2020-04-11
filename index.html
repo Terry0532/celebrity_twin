@@ -22,13 +22,41 @@
     <title>Celebrity Twin</title>
   </head>
 
-  <body>
-    <!-- JUMBOTRON -->
-    <div class="container jumbotron u-full-width" data-attribution="Photo by Andi ~ Kernel ˈkaːɔs on Unsplash">
-      <div class="twelve columns headerText">
-        <p>Celebrity Twin!</p>
+
+<body>
+  <!-- JUMBOTRON -->
+  <div class="container jumbotron u-full-width" data-attribution="Photo by Andi ~ Kernel ˈkaːɔs on Unsplash">
+    <div class="twelve columns headerText">
+      <p>Celebrity Twin!</p>
+    </div>
+  </div>
+
+
+  <!-- SEARCH INPUT -->
+  <form class="container">
+    <div class="row">
+      <div class="six columns">
+        <label for="celebSearchInput">Search for a Celeb!</label>
+        <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
+      </div>
+      <!-- SEARCH HISTORY -->
+      <!-- drop-down list dynamically generates a list of most recent searches, list items pulled from local storage -->
+      <div class="six columns">
+        <label for="exampleRecipientInput">Previous Searches</label>
+        <select class="u-full-width" id="exampleRecipientInput">
+          <option value="Option 1">No Recent Searches</option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </select>
       </div>
     </div>
+    <!-- SUBMIT BUTTON -->
+    <div class="row">
+      <div class="four columns">
+        <input class="button-primary u-full-width" type="submit" value="submit" id="submitBtn">
+      </div>
+    </div>
+  </form>
 
     <!-- ERROR MODAL -->
     <!-- by default hidden, triggered by displayModal(). -->
@@ -50,32 +78,6 @@
         </div>
       </div>
     </div>
-
-    <!-- SEARCH INPUT -->
-    <form class="container">
-      <div class="row">
-        <div class="six columns">
-          <label for="celebSearchInput">Search for a Celeb!</label>
-          <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
-        </div>
-        <!-- SEARCH HISTORY -->
-        <!-- drop-down list dynamically generates a list of most recent searches, list items pulled from local storage -->
-        <div class="six columns">
-          <label for="exampleRecipientInput">Previous Searches</label>
-          <select class="u-full-width" id="exampleRecipientInput">
-            <option value="Option 1">No Recent Searches</option>
-            <option value="Option 2"></option>
-            <option value="Option 3"></option>
-          </select>
-        </div>
-      </div>
-      <!-- SUBMIT BUTTON -->
-      <div class="row">
-        <div class="four columns">
-          <input class="button-primary u-full-width" type="submit" value="submit" id="submitBtn">
-        </div>
-      </div>
-    </form>
 
     <!-- DISPLAY CARD -->
     <!-- dynamically displays the results of search query (default display is hidden): -->
@@ -108,23 +110,33 @@
             
           </div>
         </div>
-        <!-- right-hand column -->
-        <div class="six columns">
-          <!-- CELEB IMAGE -->
-          <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity" data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+        <!-- CELEB BIRTHSTONE -->
+        <div class="row u-full-width">
+          <h5>Birthstone: <span class="resultText" id="celebZodiac">Emerald </span><img
+              src="./assets/images/gemstone.png" height="21.5px" alt="celebrity birthstone" class="birthstone"></h5>
         </div>
+        <div class="row u-full-width">
+          <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
+        </div>
+      </div>
+      <!-- right-hand column -->
+      <div class="six columns">
+        <!-- CELEB IMAGE -->
+        <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
+          data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
       </div>
     </div>
+  </div>
 
-    <hr>
+  <hr>
 
-    <!-- MEDIA LINKS -->
-    <div class="container">
-      <div class="row">
-        <div class="twelve columns">
-          <p>Like your results? Connect with us online to share!</p>
-        </div>
+  <!-- MEDIA LINKS -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns">
+        <p>Like your results? Connect with us online to share!</p>
       </div>
+      
       <div class="row">
         <div class="three columns u-max-full-width">
           <a class="button link" href="./assets/media/facebook.html" target="_blank" id="facebook"><i class="fa fa-facebook-square"></i>  Facebook</a>
@@ -138,10 +150,12 @@
         <div class="three columns u-max-full-width">
           <a class="button link" href="./assets/media/pinterest.html" target="_blank" id="pinterest"><i class="fa fa-pinterest"></i>  Pinterest</a>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <hr>
+  <hr>
 
   <footer>
     <div class="copyright">©MMXX Los Poderosos</div>
@@ -153,6 +167,7 @@
   <!-- individual styles -->
   <script src="./assets/js/script.js"></script>
   <script src="./assets/style.js"></script>
-    
-  </body>
+
+</body>
+
 </html>
