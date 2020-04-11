@@ -41,6 +41,10 @@ input[type="submit"].button-primary {
 .button {
   padding: 0rem 0.75rem;
 }
+.button-primary {
+  font-size: inherit;
+  margin-bottom: 1.5rem;
+}
 .centerText {
   text-align: center;
 }
