@@ -148,6 +148,11 @@ input[type="submit"].button-primary {
 #errorCeleb {
   color: rgb(255, 115, 0);
 }
+#imageCaption {
+  color: #ce1cc5;
+  font-size: 16px;
+  text-align: center;
+}
 /* birthstone IDs (sets color of SVG gemstone image): */
 #janGarnet {
   filter: hue-rotate(150deg) saturate(70%);
