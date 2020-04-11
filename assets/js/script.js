@@ -1,42 +1,43 @@
 // GLOBAL VARIABLES FOR USE
-// Array where 8 matching names will be stored
+// Array where matching names will be stored
 var namefaceMatches = [];
-// Single name called for specific use
-// var namefaceMatch = "";
-
-// boolean value to test match validity
-var celebrityFound = false;
-
 // IMDb API Key
 var imdbApiKey = "k_Yj7L9aPc";
-
 // Three items we want to grab from the IMDb search and post to site
 var matchName = "";
 var matchImgURL = "";
 var matchDescription = "";
-// Used to keep functions waiting until one is completed
-//var wait = true;
-// If good match is found
-// var matchFound = false;
-
 // SECONDARY API KEY FOR NAMEFACE API
 var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933d";
-
-// FOR THE TIME BEING
-localStorage.clear();
-
 //store uploaded img url
 var uploadedImageUrl;
-
 //delete uploaded img
 var deleteImageHash;
 
+localStorage.clear();
+
+
 // FUNCTIONS
 
+function displayModal() {
+    var modal = $(".modal");
+    modal.addClass("modal-open");
+    // closes if X icon or button clicked:
+    $(".close-modal").on("click", function () {
+        modal.removeClass("modal-open");
+    });
+    // closes if clicked outside content area:
+    $(".modal-inner").on("click", function () {
+        modal.removeClass("modal-open");
+    });
+    // prevents modal inner from closing parent when clicked:
+    $(".modal-content").on("click", function (event) {
+        event.stopPropagation();
+    });
+};
+
 // Settings and API call to namefaceapi
-
 // IN SETTINGS FIND WAY TO USE displayModal FUNCTION WHEN ERROR OCCURS
-
 var faceNameAPICall = function (imgURL) {
     var settings = {
         "async": true,
@@ -51,42 +52,29 @@ var faceNameAPICall = function (imgURL) {
         },
         "processData": false,
         "data": "{  \"images\": [\"" + imgURL + "\"]}"
-        // "data": "{  \"images\": [\"https://i.ibb.co/2j8cKjV/headshot-alex1.jpg\"]}"
     }
+    // If they try searching without an input, we want to return
     if (imgURL === "") {
-        console.log("Search was empty!");
-        //return;
+        displayModal();
+        return;
     } else {
         $.ajax(settings).done(function (response) {
+            var numOfMatches = response.images[0].results[0].matches.length;
 
-            console.log(response);
-            // Matching names of Alex's photo
-            namefaceMatches = [response.images[0].results[0].matches[0].name,
-            response.images[0].results[0].matches[1].name,
-            response.images[0].results[0].matches[2].name,
-            response.images[0].results[0].matches[3].name,
-            response.images[0].results[0].matches[4].name,
-            response.images[0].results[0].matches[5].name,
-            response.images[0].results[0].matches[6].name,
-            response.images[0].results[0].matches[7].name];
-
-
+            for (var i = 0; i < numOfMatches; i++) {
+                namefaceMatches[i] = response.images[0].results[0].matches[i].name;
+            }
+            // Now that we have our matching names results, start testing on imdb api
             checkMatches(namefaceMatches);
         });
     }
-
 }
 
 // Checking the facename matches in the imdb API
-
 var checkMatches = function (namefaceMatches) {
 
     // LOOPING THROUGH ALL CELEBS ON LIST
     for (var i = (namefaceMatches.length - 1); i >= 0; i--) {
-
-        // if(matchFound === true) {
-        //     return;
-        // }
 
         const namefaceMatch = namefaceMatches[i];
 
@@ -94,11 +82,9 @@ var checkMatches = function (namefaceMatches) {
         var fixName = namefaceMatches[i];
         var space = " ";
         var spaceFill = "%20";
-
         while (fixName.indexOf(space) > -1) {
             fixName = fixName.replace(space, spaceFill);
         }
-
         var searchCeleb = fixName;
 
         var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
@@ -121,7 +107,6 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
             error: function (err) {
                 celebrityFound = false;
                 console.log(err.status);
-                //postMatch();
             }
         }).then(function (response) {
             celebrityFound = true;
@@ -143,14 +128,9 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 console.log(namefaceMatch + " has no image available.");
             }
             else {
-                //console.log(namefaceMatch + " = " + response.results[0].title);
                 matchName = response.results[0].title;
-                //console.log("matchName = " + matchName);
                 matchImgURL = response.results[0].image;
-                //console.log("matchImgURL = " + matchImgURL);
                 matchDescription = response.results[0].description;
-                //console.log("matchDescription" + matchDescription);
-                matchFound = true;
             }
 
             resolve({ matchName, matchImgURL, matchDescription });
@@ -159,30 +139,18 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
     });
 };
 
-// Posting the matched celebrity information to the webpage
+// Posting the matched IMDb information to the webpage
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
-    // wikiResult(matchName);
-    // Checking what match results were stored for this search
-    console.log("Mark!");
-    console.log("Posting the true match information!");
-    console.log("matchName = " + matchName);
-    console.log("matchImgURL = " + matchImgURL);
-    console.log("matchDescription = " + matchDescription);
-
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
     $("#celebDOB").html(matchDescription);
     saveMatchHistory(matchName);
-    // ADD IN WIKIPEDIA RESULT!
+    // Once IMDb results are posted, search and post the wikipedia results
     wikiResult(matchName);
 };
 
-//this is just a test, remove later
-var test = "Scarlett O'Hara";
-wikiResult(test);
-
-//to find results from wikipedia api
+// to find results from wikipedia api
 function wikiResult(matchName) {
     var endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${matchName}`;
     fetch(endpoint)
@@ -190,17 +158,61 @@ function wikiResult(matchName) {
         .then(data => {
             const results = data.query.search;
             displayResults(results);
+            deleteUpload(deleteImageHash);
         });
 }
 
-//display wikipedia results
+// display wikipedia results
 function displayResults(results) {
-
-    console.log(results);
-
     var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
-    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '>' + results[0].snippet + '</a>');
+    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '><i class="fab fa-wikipedia-w"></i></a>');
 }
+
+
+var saveMatchHistory = function (searchedName) {
+
+    var matchHistory = JSON.parse(localStorage.getItem("matchHistory")) || [];
+
+    if (matchHistory.indexOf(searchedName) > -1) {
+        return;
+    }
+    else {
+        matchHistory.unshift(searchedName);
+        // Only keep up to five most recent searches
+        // matchHistory.splice(5);
+
+        localStorage.setItem("matchHistory", JSON.stringify(matchHistory));
+
+        $("#exampleRecipientInput").append('<option value="' + searchedName + '">' + searchedName + '</option>');
+
+    }
+};
+
+
+// Delete link upload to the submission
+function deleteUpload(deleteImageHash) {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Client-ID 93e7eb73da70d74");
+    var apiURL = "https://api.imgur.com/3/image/" + deleteImageHash;
+
+    var formdata = new FormData();
+
+    var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+    };
+
+    fetch(apiURL, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+};
+
+
+
+// EVENT LISTENERS
 
 // Event listener for a new search
 $("form").on("submit", function (event) {
@@ -211,7 +223,7 @@ $("form").on("submit", function (event) {
     faceNameAPICall(imgURL);
 });
 
-// Event listener for search history (REFER TO NYT ASSIGNMENT)
+// Event listener for search history
 $("#exampleRecipientInput").on("change", function () {
     console.log("Switching through history.");
     console.log("Option selected = ", $("#exampleRecipientInput").val());
@@ -233,64 +245,16 @@ $("#exampleRecipientInput").on("change", function () {
     var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
 
     imdbAPIcall(queryURL, selectedName).then(postMatch);
-    // THIS FUNCTION SHOULD EVENTUALLY BE MOVED TO THE END OF POSTMATCH
-    // saveMatchHistory(testName);
-
 });
 
-// CURRENTLY NOT WORKING
-var renderMatchHistory = function () {
-    $("#exampleRecipientInput").empty();
 
-    var matchHistory = JSON.parse(localStorage.getItem("matchHistory")) || [];
-
-    if (matchHistory.length === 0) {
-        $("#exampleRecipientInput").append('<option>No Recent Searches</option>');
-    }
-    else {
-
-        for (var i = 0; matchHistory.length; i++) {
-            var name = matchHistory[i];
-            $("#exampleRecipientInput").append('<option value="' + name + '">' + name + '</option>');
-        }
-
-    }
-
-};
-
-var saveMatchHistory = function (searchedName) {
-
-    var matchHistory = JSON.parse(localStorage.getItem("matchHistory")) || [];
-
-    if (matchHistory.indexOf(searchedName) > -1) {
-        return;
-    }
-    else {
-        matchHistory.unshift(searchedName);
-        // Only keep up to five most recent searches
-        matchHistory.splice(5);
-
-        localStorage.setItem("matchHistory", JSON.stringify(matchHistory));
-
-        // renderMatchHistory();
-        $("#exampleRecipientInput").append('<option value="' + searchedName + '">' + searchedName + '</option>');
-
-    }
-
-    // var newOption = $("<option></option>").text(searchedName);
-    // $(newOption).attr("value", searchedName);
-    // $(newOption).appendTo("#exampleRecipientInput");
-
-};
-
+// When user clicks to upload an image
 $(document).on("click", ".submitFile", function (event) {
     event.preventDefault();
-    console.log("clicked submit");
 
     var $files = $(".uploadFile").get(0).files;
 
     if ($files.length) {
-        console.log("uploading");
 
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '93e7eb73da70d74';
@@ -314,38 +278,10 @@ $(document).on("click", ".submitFile", function (event) {
         settings.data = formData;
 
         $.ajax(settings).done(function (response) {
-            console.log(response);
-            console.log(JSON.parse(response).data.link);
             uploadedImageUrl = JSON.parse(response).data.link;
             $("#celebSearchInput").val(uploadedImageUrl);
             deleteImageHash = JSON.parse(response).data.deletehash;
-            console.log(deleteImageHash);
         });
     }
 });
 
-$(".deleteFile").on("click", function (event) {
-    event.preventDefault();
-    console.log("clicked delete");
-    deleteUpload(deleteImageHash);
-});
-
-function deleteUpload(deleteImageHash) {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Client-ID 93e7eb73da70d74");
-    var apiURL = "https://api.imgur.com/3/image/" + deleteImageHash;
-
-    var formdata = new FormData();
-
-    var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow'
-    };
-
-    fetch(apiURL, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
