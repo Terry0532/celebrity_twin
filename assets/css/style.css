@@ -44,6 +44,12 @@ input[type="submit"].button-primary {
 .centerText {
   text-align: center;
 }
+.copyright {
+  text-align: right;
+  font-size: 14px;
+  margin: 0 2rem;
+  vertical-align: middle;
+}
 .headerText {
   animation: blinking 1s infinite;
   color: #ce1cc5;
