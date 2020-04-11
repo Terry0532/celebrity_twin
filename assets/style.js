@@ -189,5 +189,5 @@ $(document).ready(function(){
   // • Create dummy pages for social media links.
   // • Integrate the variables created in script.js to get and set data in local storage.
 
-// NOTES FROM ISSUE #24, "DUMMY LINK PAGES":
-// "I've decided to create a few dummy 'link' pages for the social media buttons on the splash page. These will be for no other reason than demonstration."
+// NOTES FROM ISSUE #31, "FORMAT INPUT FIELDS":
+// "The search inputs need to be updated to render, 'Retrieve (Get) Your Celebrity URL' and 'Your Search URL.' The search results field need to be reformatted to render an image caption and optional results—such as birthdate, birthplace, zodiac sign, and birthstone—need to be set by default to hidden."
