@@ -224,6 +224,10 @@ input[type="submit"].button-primary {
   0% { text-shadow: 2px 2px aqua; }
   100% { text-shadow: 2px 2px rgb(28, 133, 133); }
 }
+<<<<<<< HEAD
+=======
+/* Spin the loader */
+>>>>>>> d6b550ee11d9bab0cf0e106d2612764d924d738b
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

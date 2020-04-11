@@ -144,7 +144,11 @@ var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
 
     //hide loading spinner
     $("#submitSpinner").addClass("d-none");
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> d6b550ee11d9bab0cf0e106d2612764d924d738b
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
