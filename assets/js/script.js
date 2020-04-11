@@ -169,7 +169,7 @@ function wikiResult(matchName) {
 // display wikipedia results
 function displayResults(results) {
     var url = encodeURI(`https://en.wikipedia.org/wiki/${results[0].title}`);
-    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '><i class="fab fa-wikipedia-w"></i></a>');
+    $("#celebWikiResult").html('<a href="' + url + '"' + 'target="_blank"' + '><i class="fa fa-wikipedia-w"></i></a>');
 }
 
 
