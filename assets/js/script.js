@@ -159,7 +159,7 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 
 // Posting the matched celebrity information to the webpage
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
-    // wikiResult(matchName);
+   // wikiResult(matchName);
     // Checking what match results were stored for this search
     console.log("Mark!");
     console.log("Posting the true match information!");
@@ -291,3 +291,23 @@ var saveMatchHistory = function(searchedName) {
 
 
 };
+
+
+// FUNCTION USED FOR TESTING, provide name, imgurl and image description
+var quickTest = function (matchName, matchImgURL, matchDescription) {
+    // wikiResult(matchName);
+     // Checking what match results were stored for this search
+     console.log("Mark!");
+     console.log("Posting the true match information!");
+     console.log("matchName = " + matchName);
+     console.log("matchImgURL = " + matchImgURL);
+     console.log("matchDescription = " + matchDescription);
+ 
+     // Appending the data to the html card
+     $("#celebResult").html(matchName);
+     $("#celebImage").attr("src", matchImgURL);
+     $("#celebDOB").html(matchDescription);
+     saveMatchHistory(matchName);
+     // ADD IN WIKIPEDIA RESULT!
+     wikiResult(matchName);
+ };
