@@ -139,6 +139,17 @@ input[type="submit"].button-primary {
   opacity: 1;
   z-index: 1;
 }
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+.mt {
+  margin-top: 40px;
+}
 
 /* ID STYLES */
 #celebImage {
@@ -209,4 +220,8 @@ input[type="submit"].button-primary {
 @keyframes blinking {
   0% { text-shadow: 2px 2px aqua; }
   100% { text-shadow: 2px 2px rgb(28, 133, 133); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
