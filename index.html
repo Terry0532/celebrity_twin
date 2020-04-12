@@ -1,3 +1,13 @@
+<!--
+    CELEBRITY TWINS
+    UUBC Project 1
+      ----------
+      A. Hamilton
+       A. Phan
+       T. Gong
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +46,7 @@
   <form class="container">
     <div class="row">
       <div class="six columns u-pull-left">
-        <label for="img">Get your celeb URL from an image:</label>
+        <label for="img">Upload an image:</label>
         <input type="file" id="img" name="img" accept="image/*" class="uploadFile">
         <input type="submit" class="button-primary submitFile" value="UPLOAD"></input>
       </div>
@@ -46,24 +56,22 @@
     </div>
     <div class="row">
       <div class="six columns">
-        <label for="celebSearchInput">Your search URL:</label>
+        <label for="celebSearchInput">Search with image URL:</label>
         <input class="u-full-width" type="text" placeholder="Famous McCelebrity" id="celebSearchInput">
       </div>
       <!-- SEARCH HISTORY -->
       <!-- drop-down list dynamically generates a list of most recent searches, list items pulled from local storage -->
       <div class="six columns">
-        <label for="exampleRecipientInput">Previous Searches</label>
-        <select class="u-full-width" id="exampleRecipientInput">
-          <option value="Option 1">No Recent Searches</option>
-          <option value="Option 2"></option>
-          <option value="Option 3"></option>
+        <label for="matchHistory">All Matches</label>
+        <select class="u-full-width" id="matchHistory">
+          <option value="default">--- Select ---</option>
         </select>
       </div>
     </div>
     <!-- SUBMIT BUTTON -->
     <div class="row">
       <div class="four columns">
-        <input class="button-primary u-full-width" type="submit" value="submit" id="submitBtn">
+        <input class="button-primary u-full-width" type="submit" value="Find Twin!" id="submitBtn">
       </div>
       <div class="eight columns">
         <div class="loader d-none" id="submitSpinner"></div>
@@ -82,8 +90,7 @@
         </div>
         <div class="modal-content-inner">
           <h2>Whoops!</h2>
-          <p class="centeredText">We can't find <span id="errorCeleb">Mr. Errorpants</span>! Please check your spelling
-            and try again.</p>
+          <p class="centeredText">Sorry, we can't find your long lost celebrity twin! Make sure to use a valid img url or try a different image.</p>
         </div>
         <hr>
         <div class="modal-buttons">
@@ -97,7 +104,7 @@
   <!-- dynamically displays the results of search query (default display is hidden): -->
   <!-- card header -->
   <div class="container" id="results">
-    <h2 class="centerText">Search Results</h2>
+    <h2 class="centerText">Match Results</h2>
     <!-- card body -->
     <div class="row bordered">
 
@@ -125,15 +132,14 @@
         </div>
         <!-- celeb Wikipedia result -->
         <div class="row u-full-width">
-          <h5>Wiki result: <span class="resultText" id="celebWikiResult"></span></h5>
+          <h5>To learn more, click here -> <span class="resultText" id="celebWikiResult"></span></h5>
         </div>
       </div>
 
       <!-- RIGHT COLUMN -->
       <div class="six columns">
         <!-- celebrity image -->
-        <img src="./assets/images/thibault-debaene-pZTVa_Gt1f8-unsplash.jpg" alt="demo image of celebrity"
-          data-attribution="Photo by Thibault Debaene on Unsplash" id="celebImage">
+        <img alt="demo image of celebrity" data-attribution="Celebrity's Image" id="celebImage">
         <!-- image caption -->
         <div class="row u-full-width">
         </div>

@@ -1,3 +1,11 @@
+/* NOTE
+--------------------------------------------------
+    This JavaScript File primarily contains 
+    functions not currently in use. Displays
+    roadmap goals for what we would like to add
+    to our application with more resources.
+--------------------------------------------------  */
+
 $(document).ready(function(){
   // for dispalying ERROR MODAL:
   function displayModal() {

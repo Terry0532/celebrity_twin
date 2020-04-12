@@ -1,3 +1,14 @@
+/* script.js
+
+Table Of Contents
+--------------------------------------------------
+ - Global Variables (line 12)
+ - Functions (line 32)
+    - Four API Calls (Imgur, nameFace, IMDb, Wikipedia)
+ - Event Listeners (line 284)
+--------------------------------------------------  */
+
+
 // GLOBAL VARIABLES FOR USE
 // Array where matching names will be stored
 var namefaceMatches = [];
@@ -13,8 +24,9 @@ var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933
 var uploadedImageUrl;
 //delete uploaded img
 var deleteImageHash;
-
+// We want local storage to clear upon each visit / refresh
 localStorage.clear();
+
 
 
 // FUNCTIONS
@@ -56,16 +68,28 @@ var faceNameAPICall = function (imgURL) {
     // If they try searching without an input, we want to return
     if (imgURL === "") {
         displayModal();
+        //hide sumbit spinner
+        $("#submitSpinner").addClass("d-none");
         return;
-    } else {
+    } 
+    else {
         $.ajax(settings).done(function (response) {
-            var numOfMatches = response.images[0].results[0].matches.length;
-
-            for (var i = 0; i < numOfMatches; i++) {
-                namefaceMatches[i] = response.images[0].results[0].matches[i].name;
+            // If the API response doesn't find any matches, display modal and return
+            if(response.images[0].results.length < 1) {
+                displayModal();
+                //hide submit spinner
+                $("#submitSpinner").addClass("d-none");
+                return;
             }
-            // Now that we have our matching names results, start testing on imdb api
-            checkMatches(namefaceMatches);
+            else {
+                var numOfMatches = response.images[0].results[0].matches.length;
+                
+                for (var i = 0; i < numOfMatches; i++) {
+                    namefaceMatches[i] = response.images[0].results[0].matches[i].name;
+                    // Now that we have our matching names results, start testing on imdb api
+                    checkMatches(namefaceMatches);
+                }
+            }
         });
     }
 }
@@ -109,23 +133,19 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 console.log(err.status);
             }
         }).then(function (response) {
-            celebrityFound = true;
-            console.log(response);
 
             // Setting up conditionals so that we only select a match with favorable characteristics
             // If the name doesn't contain IMDb Data
             if (response.results.length < 1) {
-                console.log("No found results for " + namefaceMatch);
                 return;
             }
             // If the IMDb name doesn't actually match the nameface name
             else if (namefaceMatch != response.results[0].title) {
-                console.log(namefaceMatch + " != " + response.results[0].title);
                 return;
             }
             // If the person on IMDb has a "nopicture" placeholder
             else if (response.results[0].image === "https://imdb-api.com/images/original/nopicture.jpg") {
-                console.log(namefaceMatch + " has no image available.");
+                return;
             }
             else {
                 matchName = response.results[0].title;
@@ -141,9 +161,16 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 
 // Posting the matched IMDb information to the webpage
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
-
+    // If no valid match was found, return error module
+    if (matchName === "") {
+        displayModal();
+        //hide loading spinner
+        $("#uploadSpinner").addClass("d-none");
+        return;
+    }
     //hide loading spinner
     $("#submitSpinner").addClass("d-none");
+    $("#results").show();
   
     // Appending the data to the html card
     $("#celebResult").html(matchName);
@@ -174,21 +201,17 @@ function displayResults(results) {
 
 
 var saveMatchHistory = function (searchedName) {
-
+    // Matched names are stored to local storage as to keep record of who matches have been found for
     var matchHistory = JSON.parse(localStorage.getItem("matchHistory")) || [];
 
+    // If the user is looking up a previous name from local storage, we don't need to add it again to our selects
     if (matchHistory.indexOf(searchedName) > -1) {
         return;
     }
     else {
         matchHistory.unshift(searchedName);
-        // Only keep up to five most recent searches
-        // matchHistory.splice(5);
-
         localStorage.setItem("matchHistory", JSON.stringify(matchHistory));
-
-        $("#exampleRecipientInput").append('<option value="' + searchedName + '">' + searchedName + '</option>');
-
+        $("#matchHistory").append('<option value="' + searchedName + '">' + searchedName + '</option>');
     }
 };
 
@@ -250,6 +273,8 @@ function uploadImage($files) {
     }
 }
 
+
+
 // EVENT LISTENERS
 
 // Event listener for a new search
@@ -265,16 +290,13 @@ $("form").on("submit", function (event) {
 });
 
 // Event listener for search history
-$("#exampleRecipientInput").on("change", function () {
-    console.log("Switching through history.");
-    console.log("Option selected = ", $("#exampleRecipientInput").val());
-
-    if ($("#exampleRecipientInput").val() === "select_recent") {
-        console.log("Default; pick another name");
+$("#matchHistory").on("change", function () {
+    // If user selects the default option, don't do anything
+    if ($("#matchHistory").val() === "default") {
         return;
     }
 
-    var selectedName = $("#exampleRecipientInput").val();
+    var selectedName = $("#matchHistory").val();
     var fixName = selectedName;
     var space = " ";
     var spaceFill = "%20";
