@@ -12,7 +12,7 @@ Table Of Contents
 // GLOBAL VARIABLES FOR USE
 // Array where matching names will be stored
 var namefaceMatches = [];
-// IMDb API Key
+// IMDb API Key (Swap out keys depending on usage)
 var imdbApiKey = "k_Yj7L9aPc";
 var imdbSecondaryApiKey = "k_RXl7Kx93";
 // Three items we want to grab from the IMDb search and post to site
@@ -134,7 +134,6 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 console.log(err.status);
             }
         }).then(function (response) {
-            console.log(response)
             // Setting up conditionals so that we only select a match with favorable characteristics
             // If the name doesn't contain IMDb Data
             if (response.results.length < 1) {
@@ -306,7 +305,7 @@ $("#matchHistory").on("change", function () {
 
     var searchCeleb = fixName;
 
-    var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey + "/" + searchCeleb;
+    var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbSecondaryApiKey + "/" + searchCeleb;
 
     imdbAPIcall(queryURL, selectedName).then(postMatch);
 });
