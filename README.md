@@ -45,7 +45,7 @@ This is the all-star lineup that is *Los Poderosos:*
 | [Anthony Phan](https://github.com/aphan1982/) | Design, CSS Framework, Styles    |
 ​
 ### Roadmap 
-Further areas of development include (but aren't limited to!) pulling more content regarding trivia, tidbits, factoids, *et cetera* about the celebrities and creating a more customized, user-oriented experience. Some of these elements could be `horoscope data`, information about the celeb's `hometown`, `interests`, `hobbies`—anything and everything that might provide the user a more personalized experience.
+Further areas of development include (but aren't limited to!) pulling more content regarding trivia, tidbits, factoids, *et cetera* about the celebrities and creating a more customized, user-oriented experience. Some of these elements could be `horoscope data`, information about the celeb's `hometown`, `interests`, `hobbies`—anything and everything that might provide the user a more personalized experience. An interface that was outlined more as a questionnaire would allow the user greater control over the elements they would see and how future results would be tailored. Ideally the services that [Celebrity Twin](https://ajhami.github.io/celebrity_twin/) has to offer would be made much more efficient by developing our proprietary, "in-house" API.
 
 ## Walk-through of App
 When the user opens the app, the `search result area` is defaulted as being blank—it requires an upload of an image to begin the matching process:
