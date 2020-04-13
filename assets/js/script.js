@@ -72,19 +72,21 @@ var faceNameAPICall = function (imgURL) {
         //hide sumbit spinner
         $("#submitSpinner").addClass("d-none");
         return;
-    } 
+    }
     else {
         $.ajax(settings).done(function (response) {
             // If the API response doesn't find any matches, display modal and return
-            if(response.images[0].results.length < 1) {
+            if (response.images[0].results.length < 1) {
                 displayModal();
+                console.log("no match")
+                deleteUpload(deleteImageHash);
                 //hide submit spinner
                 $("#submitSpinner").addClass("d-none");
                 return;
             }
             else {
                 var numOfMatches = response.images[0].results[0].matches.length;
-                
+
                 for (var i = 0; i < numOfMatches; i++) {
                     namefaceMatches[i] = response.images[0].results[0].matches[i].name;
                     // Now that we have our matching names results, start testing on imdb api
@@ -163,15 +165,17 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
     // If no valid match was found, return error module
     if (matchName === "") {
+        console.log("no match")
         displayModal();
         //hide loading spinner
         $("#uploadSpinner").addClass("d-none");
+        deleteUpload(deleteImageHash);
         return;
     }
     //hide loading spinner
     $("#submitSpinner").addClass("d-none");
     $("#results").show();
-  
+
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
@@ -235,6 +239,8 @@ function deleteUpload(deleteImageHash) {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+
+    $("#celebSearchInput").val("");
 };
 
 function uploadImage($files) {
