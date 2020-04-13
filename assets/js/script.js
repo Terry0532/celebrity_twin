@@ -24,7 +24,7 @@ var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933
 //store uploaded img url
 var uploadedImageUrl;
 //delete uploaded img
-var deleteImageHash;
+var deleteImageHash = "";
 // We want local storage to clear upon each visit / refresh
 localStorage.clear();
 
@@ -78,13 +78,20 @@ var faceNameAPICall = function (imgURL) {
             // If the API response doesn't find any matches, display modal and return
             if (response.images[0].results.length < 1) {
                 displayModal();
-                console.log("no match")
                 deleteUpload(deleteImageHash);
                 //hide submit spinner
                 $("#submitSpinner").addClass("d-none");
                 return;
             }
             else {
+
+                //if namefaceapi found more than 1 face, return error
+                if (response.images[0].results.length > 1) {
+                    displayModal();
+                    deleteUpload(deleteImageHash);
+                    return;
+                }
+
                 var numOfMatches = response.images[0].results[0].matches.length;
 
                 for (var i = 0; i < numOfMatches; i++) {
@@ -165,7 +172,6 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
 var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
     // If no valid match was found, return error module
     if (matchName === "") {
-        console.log("no match")
         displayModal();
         //hide loading spinner
         $("#uploadSpinner").addClass("d-none");
@@ -222,6 +228,12 @@ var saveMatchHistory = function (searchedName) {
 
 // Delete link upload to the submission
 function deleteUpload(deleteImageHash) {
+
+    //if user didn't upload a photo, stop
+    if (deleteImageHash == "") {
+        return;
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Client-ID 93e7eb73da70d74");
     var apiURL = "https://api.imgur.com/3/image/" + deleteImageHash;
@@ -268,7 +280,6 @@ function uploadImage($files) {
         settings.data = formData;
 
         $.ajax(settings).done(function (response) {
-
             //hide loading spinner
             $("#uploadSpinner").addClass("d-none");
 
