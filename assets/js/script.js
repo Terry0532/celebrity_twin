@@ -134,7 +134,6 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 console.log(err.status);
             }
         }).then(function (response) {
-            console.log(response)
             // Setting up conditionals so that we only select a match with favorable characteristics
             // If the name doesn't contain IMDb Data
             if (response.results.length < 1) {
