@@ -12,9 +12,9 @@ Table Of Contents
 // Array where matching names will be stored
 var namefaceMatches = [];
 // IMDb API Key (Swap out keys depending on usage)
-var imdbApiKey = "k_Yj7L9aPc";
-var imdbSecondaryApiKey = "k_RXl7Kx93";
-var anotherApiKey = "k_Vht3WzEM";
+var imdbApiKey1 = "k_Yj7L9aPc";
+var imdbApiKey2 = "k_RXl7Kx93";
+var imdbApiKey3 = "k_Vht3WzEM";
 // Three items we want to grab from the IMDb search and post to site
 var matchName = "";
 var matchImgURL = "";
@@ -98,9 +98,10 @@ var faceNameAPICall = function (imgURL) {
 
                 for (var i = 0; i < numOfMatches; i++) {
                     namefaceMatches[i] = response.images[0].results[0].matches[i].name;
-                    // Now that we have our matching names results, start testing on imdb api
-                    checkMatches(namefaceMatches);
                 }
+
+                // Now that we have our matching names results, start testing on imdb api
+                checkMatches(namefaceMatches);
             }
         });
     }
@@ -122,7 +123,7 @@ var checkMatches = function (namefaceMatches) {
         }
         var searchCeleb = fixName;
         
-        var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
+        var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey1 + "/" + searchCeleb;
         
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
         
@@ -303,7 +304,6 @@ $("form").on("submit", function (event) {
     $("#submitSpinner").removeClass("d-none");
 
     var imgURL = $("#celebSearchInput").val().trim();
-    // MUTE WHEN NEEDING TO AVOID ADDING TO API CALL COUNT
     faceNameAPICall(imgURL);
 });
 
@@ -323,7 +323,7 @@ $("#matchHistory").on("change", function () {
 
     var searchCeleb = fixName;
 
-    var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
+    var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbApiKey1 + "/" + searchCeleb;
 
     imdbAPIcall(queryURL, selectedName).then(postMatch);
 });
