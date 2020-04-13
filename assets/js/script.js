@@ -15,6 +15,7 @@ var namefaceMatches = [];
 // IMDb API Key (Swap out keys depending on usage)
 var imdbApiKey = "k_Yj7L9aPc";
 var imdbSecondaryApiKey = "k_RXl7Kx93";
+var anotherApiKey = "k_Vht3WzEM";
 // Three items we want to grab from the IMDb search and post to site
 var matchName = "";
 var matchImgURL = "";
@@ -89,6 +90,8 @@ var faceNameAPICall = function (imgURL) {
                 if (response.images[0].results.length > 1) {
                     displayModal();
                     deleteUpload(deleteImageHash);
+                    //hide submit spinner
+                    $("#submitSpinner").addClass("d-none");
                     return;
                 }
 
@@ -106,12 +109,11 @@ var faceNameAPICall = function (imgURL) {
 
 // Checking the facename matches in the imdb API
 var checkMatches = function (namefaceMatches) {
-
     // LOOPING THROUGH ALL CELEBS ON LIST
     for (var i = (namefaceMatches.length - 1); i >= 0; i--) {
-
+        
         const namefaceMatch = namefaceMatches[i];
-
+        
         // Name is swapped to replace spaces with "%20" in order to pass the whole name through the api search
         var fixName = namefaceMatches[i];
         var space = " ";
@@ -120,20 +122,20 @@ var checkMatches = function (namefaceMatches) {
             fixName = fixName.replace(space, spaceFill);
         }
         var searchCeleb = fixName;
-
-        var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbSecondaryApiKey + "/" + searchCeleb;
-
+        
+        var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
+        
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
-
+        
     }
-
+    
 };
 
 
 var imdbAPIcall = function (queryURL, namefaceMatch) {
-
+    
     return new Promise((resolve, reject) => {
-
+        
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -161,9 +163,9 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 matchImgURL = response.results[0].image;
                 matchDescription = response.results[0].description;
             }
-
+            
             resolve({ matchName, matchImgURL, matchDescription });
-
+            
         })
     });
 };
