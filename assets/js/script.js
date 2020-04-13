@@ -1,11 +1,10 @@
 /* script.js
-
 Table Of Contents
 --------------------------------------------------
- - Global Variables (line 12)
- - Functions (line 32)
+ - Global Variables (line 11)
+ - Functions (line 33)
     - Four API Calls (Imgur, nameFace, IMDb, Wikipedia)
- - Event Listeners (line 284)
+ - Event Listeners (line 296)
 --------------------------------------------------  */
 
 
@@ -324,7 +323,7 @@ $("#matchHistory").on("change", function () {
 
     var searchCeleb = fixName;
 
-    var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbSecondaryApiKey + "/" + searchCeleb;
+    var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
 
     imdbAPIcall(queryURL, selectedName).then(postMatch);
 });
@@ -342,4 +341,3 @@ $(document).on("click", ".submitFile", function (event) {
 
     uploadImage($files);
 });
-
