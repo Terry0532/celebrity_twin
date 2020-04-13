@@ -1,11 +1,10 @@
 /* script.js
-
 Table Of Contents
 --------------------------------------------------
- - Global Variables (line 12)
- - Functions (line 32)
+ - Global Variables (line 11)
+ - Functions (line 33)
     - Four API Calls (Imgur, nameFace, IMDb, Wikipedia)
- - Event Listeners (line 284)
+ - Event Listeners (line 296)
 --------------------------------------------------  */
 
 
@@ -15,6 +14,7 @@ var namefaceMatches = [];
 // IMDb API Key (Swap out keys depending on usage)
 var imdbApiKey = "k_Yj7L9aPc";
 var imdbSecondaryApiKey = "k_RXl7Kx93";
+var anotherApiKey = "k_Vht3WzEM";
 // Three items we want to grab from the IMDb search and post to site
 var matchName = "";
 var matchImgURL = "";
@@ -24,7 +24,7 @@ var namefaceSecondaryAPIKey = "efc5acba70mshee51db23cc82531p1bffd9jsn8e339ffa933
 //store uploaded img url
 var uploadedImageUrl;
 //delete uploaded img
-var deleteImageHash;
+var deleteImageHash = "";
 // We want local storage to clear upon each visit / refresh
 localStorage.clear();
 
@@ -72,19 +72,30 @@ var faceNameAPICall = function (imgURL) {
         //hide sumbit spinner
         $("#submitSpinner").addClass("d-none");
         return;
-    } 
+    }
     else {
         $.ajax(settings).done(function (response) {
             // If the API response doesn't find any matches, display modal and return
-            if(response.images[0].results.length < 1) {
+            if (response.images[0].results.length < 1) {
                 displayModal();
+                deleteUpload(deleteImageHash);
                 //hide submit spinner
                 $("#submitSpinner").addClass("d-none");
                 return;
             }
             else {
+
+                //if namefaceapi found more than 1 face, return error
+                if (response.images[0].results.length > 1) {
+                    displayModal();
+                    deleteUpload(deleteImageHash);
+                    //hide submit spinner
+                    $("#submitSpinner").addClass("d-none");
+                    return;
+                }
+
                 var numOfMatches = response.images[0].results[0].matches.length;
-                
+
                 for (var i = 0; i < numOfMatches; i++) {
                     namefaceMatches[i] = response.images[0].results[0].matches[i].name;
                     // Now that we have our matching names results, start testing on imdb api
@@ -97,12 +108,11 @@ var faceNameAPICall = function (imgURL) {
 
 // Checking the facename matches in the imdb API
 var checkMatches = function (namefaceMatches) {
-
     // LOOPING THROUGH ALL CELEBS ON LIST
     for (var i = (namefaceMatches.length - 1); i >= 0; i--) {
-
+        
         const namefaceMatch = namefaceMatches[i];
-
+        
         // Name is swapped to replace spaces with "%20" in order to pass the whole name through the api search
         var fixName = namefaceMatches[i];
         var space = " ";
@@ -111,20 +121,20 @@ var checkMatches = function (namefaceMatches) {
             fixName = fixName.replace(space, spaceFill);
         }
         var searchCeleb = fixName;
-
-        var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbSecondaryApiKey + "/" + searchCeleb;
-
+        
+        var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
+        
         imdbAPIcall(queryURL, namefaceMatch).then(postMatch);
-
+        
     }
-
+    
 };
 
 
 var imdbAPIcall = function (queryURL, namefaceMatch) {
-
+    
     return new Promise((resolve, reject) => {
-
+        
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -152,9 +162,9 @@ var imdbAPIcall = function (queryURL, namefaceMatch) {
                 matchImgURL = response.results[0].image;
                 matchDescription = response.results[0].description;
             }
-
+            
             resolve({ matchName, matchImgURL, matchDescription });
-
+            
         })
     });
 };
@@ -166,12 +176,13 @@ var postMatch = function ({ matchName, matchImgURL, matchDescription }) {
         displayModal();
         //hide loading spinner
         $("#uploadSpinner").addClass("d-none");
+        deleteUpload(deleteImageHash);
         return;
     }
     //hide loading spinner
     $("#submitSpinner").addClass("d-none");
     $("#results").show();
-  
+
     // Appending the data to the html card
     $("#celebResult").html(matchName);
     $("#celebImage").attr("src", matchImgURL);
@@ -218,6 +229,12 @@ var saveMatchHistory = function (searchedName) {
 
 // Delete link upload to the submission
 function deleteUpload(deleteImageHash) {
+
+    //if user didn't upload a photo, stop
+    if (deleteImageHash == "") {
+        return;
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Client-ID 93e7eb73da70d74");
     var apiURL = "https://api.imgur.com/3/image/" + deleteImageHash;
@@ -235,6 +252,8 @@ function deleteUpload(deleteImageHash) {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+
+    $("#celebSearchInput").val("");
 };
 
 function uploadImage($files) {
@@ -262,7 +281,6 @@ function uploadImage($files) {
         settings.data = formData;
 
         $.ajax(settings).done(function (response) {
-
             //hide loading spinner
             $("#uploadSpinner").addClass("d-none");
 
@@ -305,7 +323,7 @@ $("#matchHistory").on("change", function () {
 
     var searchCeleb = fixName;
 
-    var queryURL = "https://imdb-api.com/en/API/SearchName/" + imdbSecondaryApiKey + "/" + searchCeleb;
+    var queryURL = "https://imdb-api.com/en/API/SearchName/" + anotherApiKey + "/" + searchCeleb;
 
     imdbAPIcall(queryURL, selectedName).then(postMatch);
 });
@@ -323,4 +341,3 @@ $(document).on("click", ".submitFile", function (event) {
 
     uploadImage($files);
 });
-
